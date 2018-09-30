@@ -11,10 +11,10 @@ class BlogList extends Component {
 
   render() {
     return (
-      <div>
-        BlogList
-        <Button type="primary">ahihi</Button>
-        <i className="fas fa-search"></i>
+      <div className="wrapper">
+        <div className="ui-title">
+
+        </div>
       </div>
     )
   }
@@ -28,7 +28,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchBlogList: () => dispatch(fetchBlogList())
+    fetchBlogList: (page, entries) => dispatch(fetchBlogList(page, entries))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BlogList)

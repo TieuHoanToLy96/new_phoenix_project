@@ -8,16 +8,12 @@ const routes = [
   {
 
     path: "/admin",
-    component: App,
+    component: HocLayout(App,MainLayout),
     routes: [
       {
         path: "/admin/blog",
         component: HocLayout(BlogList, MainLayout),
         routes: [
-          {
-            path: "/admin/blog/edit/:blog_id",
-            component: HocLayout(BlogEdit, MainLayout)
-          },
           {
             path: "/admin/blog/new",
             component: HocLayout(BlogEdit, MainLayout)
