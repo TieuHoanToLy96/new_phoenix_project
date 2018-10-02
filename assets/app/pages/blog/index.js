@@ -13,7 +13,7 @@ class BlogList extends Component {
     return (
       <div className="wrapper">
         <div className="ui-title">
-        list
+          list from on_mac
         </div>
       </div>
     )
