@@ -13,8 +13,8 @@ class BlogList extends Component {
     return (
       <div className="wrapper">
         <div className="ui-title">
-        list from on_linux
-        ahihi linux 1
+          list from on_linux
+          list from on_mac
         </div>
       </div>
     )
