@@ -16,7 +16,9 @@ class BlogList extends Component {
           list from on_linux
           list from on_mac
           ahihi linux
+          ahihi mac
           ahihi linux 2
+
         </div>
       </div>
     )
