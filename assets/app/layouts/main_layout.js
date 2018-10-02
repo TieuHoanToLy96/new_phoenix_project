@@ -15,7 +15,7 @@ class MainLayout extends React.Component {
   render() {
     const { collapsed } = this.state
     return (
-      <div>
+      <div className="body">
         <div className="header">
           <div className="header-wrapper">
             <div className="header-logo" style={{width: collapsed ? 80 : 240}}>
@@ -57,8 +57,8 @@ class MainLayout extends React.Component {
         <div className="side">
           <div className="side-left"  style={{width: collapsed ? 80 : 240}} >
             <div className="side-left--wrapper">
-              
               <Menu
+                className="menu-dashboard"
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"

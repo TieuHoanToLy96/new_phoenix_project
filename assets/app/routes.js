@@ -4,23 +4,40 @@ import HocLayout from "./hocs/HocLayout"
 import App from "./components/App"
 import BlogEdit from "./pages/blog/edit"
 
-const routes = [
-  {
+import Web from "./guest/index"
 
+const routes = [
+  // {
+  //   path: "/admin",
+  //   component: HocLayout(App,MainLayout),
+  //   routes: [
+  //     {
+  //       path: "/admin/blog",
+  //       component: HocLayout(BlogList, MainLayout),
+  //       routes: [
+  //         {
+  //           path: "/admin/blog/new",
+  //           component: HocLayout(BlogEdit, MainLayout)
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  {
     path: "/admin",
-    component: HocLayout(App,MainLayout),
-    routes: [
-      {
-        path: "/admin/blog",
-        component: HocLayout(BlogList, MainLayout),
-        routes: [
-          {
-            path: "/admin/blog/new",
-            component: HocLayout(BlogEdit, MainLayout)
-          }
-        ]
-      }
-    ]
+    component: HocLayout(App, MainLayout)
+  },
+  {
+    path: "/admin/blog",
+    component: BlogList,
+  },
+  {
+    path: "/admin/blog/new",
+    component: HocLayout(BlogEdit, MainLayout)
+  },
+  {
+    path: "/",
+    component: Web
   }
 ]
 export default routes
