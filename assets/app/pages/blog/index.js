@@ -14,7 +14,7 @@ class BlogList extends Component {
       <div className="wrapper">
         <div className="ui-title">
         list from on_linux
-        ahihi linux
+        ahihi linux 1
         </div>
       </div>
     )
