@@ -12,7 +12,9 @@ class BlogIndex extends Component {
     return (
       <div className="wrapper">
         <div className="ui-title">
+
           {renderRoutes(this.props.route.routes)}
+
         </div>
       </div>
     )
