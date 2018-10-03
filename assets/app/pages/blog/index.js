@@ -19,6 +19,7 @@ class BlogList extends Component {
           ahihi mac
           ahihi linux 2
 
+
         </div>
       </div>
     )
