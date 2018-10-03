@@ -1,24 +1,19 @@
 import React, { Component } from "react"
-import { connect } from "react-redux"
-import { Button } from "antd"
+import { history } from "store"
+import { getPathnameWithoutSlash } from "../../utils/tools"
+import { renderRoutes } from "react-router-config"
+class BlogIndex extends Component {
 
-import { fetchBlogList } from "actions"
-class BlogList extends Component {
-
-  componentDidMount(){
-    this.props.fetchBlogList()
+  componentWillMount() {
+    if (getPathnameWithoutSlash(window.location.pathname) === "/admin/blog")
+      history.replace("/admin/blog/list")
   }
-
   render() {
     return (
       <div className="wrapper">
         <div className="ui-title">
-          list from on_linux
-          list from on_mac
-          ahihi linux
-          ahihi mac
-          ahihi linux 2
 
+          {renderRoutes(this.props.route.routes)}
 
         </div>
       </div>
@@ -26,15 +21,4 @@ class BlogList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    blogList: state.blog.blogList
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchBlogList: (page, entries) => dispatch(fetchBlogList(page, entries))
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(BlogList)
+export default BlogIndex

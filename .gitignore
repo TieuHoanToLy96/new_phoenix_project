@@ -26,6 +26,7 @@ npm-debug.log
 
 # Static artifacts
 /assets/node_modules
+/assets/package-lock.js
 /priv/static/js
 /priv/static/css/dist/*.css
 /priv/static/css/dist/*.map

@@ -11,7 +11,7 @@ class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        < BrowserRouter>
+        < BrowserRouter history={history}>
           {renderRoutes(routes)}
         </BrowserRouter>
       </Provider>
