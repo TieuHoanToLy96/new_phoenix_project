@@ -11,7 +11,7 @@ services:
       PG_HOST: hust-postgres
     env_file: .dev.env
     ports:
-      - "9000:4000"
+      - "9900:4000"
     volumes:
       - .:/app
     links:
@@ -22,7 +22,7 @@ services:
     image: postgres:9.6.5-alpine
     container_name: hust-postgres
     ports:
-      - "5439:5432"
+      - "5410:5400"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
