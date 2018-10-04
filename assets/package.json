@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^3.9.3",
+    "font-picker-react": "^2.0.5",
     "history": "^4.7.2",
     "immutability-helper": "^2.8.1",
     "lodash": "^4.17.11",
@@ -20,6 +21,7 @@
     "phoenix_html": "^2.12.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-froala-wysiwyg": "^2.8.5",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-config": "^4.4.0-beta.0",

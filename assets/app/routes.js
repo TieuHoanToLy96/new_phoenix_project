@@ -4,7 +4,7 @@ import HocLayout from "./hocs/HocLayout"
 import App from "./components/App"
 import BlogEdit from "./pages/blog/edit"
 import BlogList from "./pages/blog/list"
-
+import Guest from "./guest/index"
 import Web from "./guest/index"
 
 const routes = [
@@ -31,6 +31,10 @@ const routes = [
         ]
       }
     ]
+  }, 
+  {
+    path: "/", 
+    component: Guest
   }
 ]
 export default routes

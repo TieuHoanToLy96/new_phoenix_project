@@ -1,10 +1,12 @@
-import React, {Component} from "react"
-
-class BlogEdit extends Component{
-  render(){
-    return(
+import React, { Component } from "react"
+import TitleAndContent from '../../components/TitleAndContent/index'
+class BlogEdit extends Component {
+  render() {
+    return (
       <div>
-        BlogEdit fucking
+        <TitleAndContent
+          data={{ value: "ahihi" }}
+        />
       </div>
     )
   }
