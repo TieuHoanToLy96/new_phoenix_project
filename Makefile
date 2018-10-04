@@ -12,7 +12,7 @@ prod:
 	docker-compose run \
 		-e MIX_ENV=$MIX_ENV \
 		-e NODE_ENV=$NODE_ENV \
-		-e WCMS_HOSTNAME=$WCMS_HOSTNAME \
+		-e HUST_HOSTNAME=$HUST_HOSTNAME \
 		--name hust_app --rm \
 	  -p 9900:4000 \
 	  phoenix iex -S mix phx.server
