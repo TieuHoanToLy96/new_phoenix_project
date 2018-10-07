@@ -66,15 +66,15 @@ class MainLayout extends React.Component {
                 inlineCollapsed={this.state.collapsed}
               >
                 <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Dashboard</span></span>}>
-                  <Menu.Item key="5">Option 5</Menu.Item>
+                  <Menu.Item key="5">Statistic</Menu.Item>
                   <Menu.Item key="6">Option 6</Menu.Item>
                   <Menu.Item key="7">Option 7</Menu.Item>
                   <Menu.Item key="8">Option 8</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Blog</span></span>}>
-                  <Menu.Item key="9">Blog List</Menu.Item>
-                  <Menu.Item key="10">Blog Categories</Menu.Item>
-                  <Menu.Item key="11">Blog Tag</Menu.Item>
+                  <Menu.Item key="/admin/blog/list">Blog List</Menu.Item>
+                  <Menu.Item key="/admin/blog/categories">Blog Categories</Menu.Item>
+                  <Menu.Item key="1/admin/blog/tag">Blog Tag</Menu.Item>
                   {/* <SubMenu key="sub3" title="Submenu">
                     <Menu.Item key="11">Option 11</Menu.Item>
                     <Menu.Item key="12">Option 12</Menu.Item>

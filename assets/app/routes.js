@@ -10,11 +10,11 @@ import Web from "./guest/index"
 const routes = [
   {
     path: "/admin",
-    component: App,
+    component: HocLayout(App, MainLayout),
     routes: [
       {
         path: "/admin/blog",
-        component: HocLayout(BlogIndex, MainLayout),
+        component: BlogIndex, 
         routes: [
           {
             path: "/admin/blog/list",

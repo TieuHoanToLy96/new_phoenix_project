@@ -1,4 +1,4 @@
-import { Provider } from "react-redux"
+import { Provider} from "react-redux"
 import React, { Component } from "react"
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom"
@@ -11,9 +11,9 @@ class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        < BrowserRouter history={history}>
+        < ConnectedRouter history={history}>
           {renderRoutes(routes)}
-        </BrowserRouter>
+        </ConnectedRouter>
       </Provider>
 
     )

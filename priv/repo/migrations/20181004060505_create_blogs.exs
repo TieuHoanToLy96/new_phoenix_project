@@ -15,6 +15,7 @@ defmodule HustWeb.Repo.Migrations.CreateBlogs do
       add :is_published, :boolean, default: false
       timestamps()
     end
+    create index(:blogs, [:slug, :is_deleted], where: "is_deleted = false")
   end
 
   def down do
