@@ -11,28 +11,34 @@ class TitleAndContent extends React.Component {
     super(props);
     this.state = { activeFont: 'Roboto' };
   }
+
+  handleChangeInputField = (field) => e => {
+    let value = e.target ? e.target.value : e
+    this.props.handleChangeInputField(field, value)
+  }
+
+
   render() {
     const froalaConfig = ["undo", "redo", "|", "fontSize", "fontFamily", "color", , "bold", "italic", "underline", "strikeThrough", "outdent", "indent", "clearFormatting", "insertLink", "fullscreen"]
 
     return (
-      <div className="ui-card">
-        <div className="ui-card__section">
-          <div className="form-section">
-            <label> Title</label>
-            <Input />
-          </div>
-          <div className="form-section no-margin">
-            <label>Content</label>
-            <FroalaEditor
-              config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
-              tag="textarea"
-              model={this.props.data.value}
-              onModelChange={(value) => console.log(value)}
-            />
-          </div>
-
+      <div>
+        <div className="form-section">
+          <label> Title</label>
+          <Input onChange={this.handleChangeInputField("name")}/>
         </div>
+        <div className="form-section no-margin">
+          <label>Content</label>
+          <FroalaEditor
+            config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
+            tag="textarea"
+            // model={this.props.data.value}
+            onModelChange={this.handleChangeInputField("content")}
+          />
+        </div>
+
       </div>
+
     )
   }
 }

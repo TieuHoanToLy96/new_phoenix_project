@@ -1,13 +1,77 @@
 .body
   display: flex
   flex-direction: column
+  background-color: #f4f6f8
 .body-html
   font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif
 .wrapper-content
   max-width: 991px
   margin: auto
   padding-top: 24px
+  
 .no-margin
   margin: 0 !important
 .no-padding
   padding: 0 !important
+.mr
+  &-15
+    margin-right: 15px
+  &-30
+    margin-right: 30px
+.mb
+  &-15
+    margin-bottom: 15px
+  &-30
+    margin-bottom: 30px
+.is
+  &-full
+    &-width
+      width: 100%
+    &-height
+      height: 100%
+  &-flex
+    display: flex
+    &-end
+      justify-content: flex-end
+  &-row
+    flex-direction: row
+  &-between
+    justify-content: space-between
+  &-center
+    justify-content: center
+    align-items: center
+  &-relative
+    position: relative
+  &-absolute
+    position: absolute
+  &-right
+    right: 0
+  &-left
+    left: 0
+  &-top
+    top: 0
+  &-bottom
+    bottom: 0
+.default
+  &-button
+    width: 90px;
+    height: 40px
+    display: flex;
+    cursor: pointer
+    border: 1px solid #c4cdd5
+    box-sizing: border-box
+    text-align: center
+    border-radius: 3px
+    line-height: 40px
+    display: block
+    color: #000000
+    &--save
+      background-color: #606ec5
+      border: 1px solid #3f4eae
+      color: #ffffff
+      &:hover
+        opacity: 0.9
+        box-shadow: 0 0 0 1px rgba(63,63,68,0.05), 0 1px 3px 0 rgba(63,63,68,0.15);
+
+.devider
+  color: #dfe3e8

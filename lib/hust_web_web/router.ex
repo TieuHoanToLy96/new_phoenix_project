@@ -13,15 +13,32 @@ defmodule HustWebWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", HustWebWeb do
-    pipe_through :browser # Use the default browser stack
+  pipeline :app do
+    plug(:put_layout, {HustWebWeb.LayoutView, :app})
+  end
 
-    # get "/", PageController, :index
-    get "/*path", PageController, :index
+
+
+  scope "/", HustWebWeb,  host: System.get_env("HUST_HOSTNAME") do
+    pipe_through :browser
+
+    # Use the default browser stack
+
+    scope "/" do
+      get("/", PageController, :index)
+    end
+    pipe_through(:app)
+    get("/*path", PageController, :app)
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HustWebWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", HustWebWeb do
+    pipe_through :api
+    scope "/admin" do
+      scope "/blogs" do
+        get("/get_all", BlogController, :get_all)
+        post("/create_blog", BlogController, :create)
+      end
+    end
+  end
 end

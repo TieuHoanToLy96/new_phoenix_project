@@ -59,8 +59,8 @@ class MainLayout extends React.Component {
             <div className="side-left--wrapper">
               <Menu
                 className="menu-dashboard"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['1', '2']}
+                defaultOpenKeys={['sub1', 'sub2']}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}

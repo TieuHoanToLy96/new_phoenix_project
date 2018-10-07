@@ -1,1 +1,30 @@
-<div id="react-app" style="height: 100%"></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HustWeb</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dist/app.css") %>">
+     <link rel="stylesheet" href="<%= static_path(@conn, "/css/antd.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/bulma.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/font-awesome.min.css") %>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+  </head>
+
+  <body style="body-html">
+    <div >
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+      
+    </div> 
+   <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

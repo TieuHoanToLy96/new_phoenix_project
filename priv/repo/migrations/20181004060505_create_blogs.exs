@@ -13,6 +13,7 @@ defmodule HustWeb.Repo.Migrations.CreateBlogs do
       add :author, :string
       add :is_deleted, :boolean, default: false
       add :is_published, :boolean, default: false
+      add :is_pinned, :boolean, default: false
       timestamps()
     end
     create index(:blogs, [:slug, :is_deleted], where: "is_deleted = false")
