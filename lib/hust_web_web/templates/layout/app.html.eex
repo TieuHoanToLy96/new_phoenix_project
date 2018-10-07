@@ -18,13 +18,13 @@
 
   </head>
 
-  <body>
+  <body style="body-html">
     <div >
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
       
     </div> 
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+   <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

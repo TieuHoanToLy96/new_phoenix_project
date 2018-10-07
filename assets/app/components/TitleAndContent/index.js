@@ -17,16 +17,19 @@ class TitleAndContent extends React.Component {
     return (
       <div className="ui-card">
         <div className="ui-card__section">
-          <div className="input-form">
+          <div className="form-section">
             <label> Title</label>
             <Input />
           </div>
-          <FroalaEditor
-            config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
-            tag="textarea"
-            model={this.props.data.value}
-            onModelChange={(value) => console.log(value)}
-          />
+          <div className="form-section no-margin">
+            <label>Content</label>
+            <FroalaEditor
+              config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
+              tag="textarea"
+              model={this.props.data.value}
+              onModelChange={(value) => console.log(value)}
+            />
+          </div>
 
         </div>
       </div>
