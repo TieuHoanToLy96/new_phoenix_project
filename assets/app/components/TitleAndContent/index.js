@@ -20,19 +20,21 @@ class TitleAndContent extends React.Component {
 
   render() {
     const froalaConfig = ["undo", "redo", "|", "fontSize", "fontFamily", "color", , "bold", "italic", "underline", "strikeThrough", "outdent", "indent", "clearFormatting", "insertLink", "fullscreen"]
-
+    const {content, name} = this.props.data
     return (
       <div>
         <div className="form-section">
           <label> Title</label>
-          <Input onChange={this.handleChangeInputField("name")}/>
+          <Input 
+          value={name}
+          onChange={this.handleChangeInputField("name")}/>
         </div>
         <div className="form-section no-margin">
           <label>Content</label>
           <FroalaEditor
             config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
             tag="textarea"
-            // model={this.props.data.value}
+            model={content}
             onModelChange={this.handleChangeInputField("content")}
           />
         </div>

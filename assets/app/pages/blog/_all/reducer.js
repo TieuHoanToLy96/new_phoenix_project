@@ -1,13 +1,15 @@
 import update from "immutability-helper"
 const initState = {
   blogList: [], 
-  editPost: {}
+  editPost: {}, 
+  total_entries: 0
 }
 export default (state = initState, action) => {
   switch(action.type){
     case "BLOG::FETCH_BLOG_LIST_SUCCESS":
       return update(state, {
-        blogList: {$set: action.payload}
+        blogList: {$set: action.payload.blog_list}, 
+        total_entries: {$set: action.payload.total_entries}
       })
     case "BLOG::CREATE_BLOG_POST_SUCCESS":{
       return update(state, {
@@ -20,6 +22,21 @@ export default (state = initState, action) => {
         editPost: {
           [field]: {$set: value}
         }
+      })
+    }
+    case "BLOG::SET_EDIT_BLOG": {
+      return update(state, {
+        editPost: {$set: action.payload}
+      })
+    }
+    case "BLOG::GET_EDIT_BLOG_SUCCESS": {
+      return update(state, {
+        editPost: {$set: action.payload}
+      })
+    }
+    case "BLOG::UPDATE_BLOG_POST_SUCCESS": {
+      return update(state, {
+        editPost: {$set: action.payload}
       })
     }
     default: return state

@@ -4,7 +4,7 @@ class SelectPublish extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      value: false
+      value: this.props.data
     }
   }
 
@@ -12,14 +12,14 @@ class SelectPublish extends React.Component {
     this.setState({
       value: e.target.value
     })
+    this.props.handleChangeInputField("is_published", e.target.value)
   }
   
   render() {
     return (
-      
           <div className="form-section">
           <h1>Visibility</h1>
-            <Radio.Group onChange={this.onChange} value={this.state.value}>
+            <Radio.Group onChange={this.onChange} value={this.state.value || this.props.data}>
               <Radio value={true}>Visible</Radio>
               <Radio value={false}>Hidden</Radio>
             </Radio.Group>

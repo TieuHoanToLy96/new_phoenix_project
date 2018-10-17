@@ -7,6 +7,7 @@ class SearchEngine extends React.Component {
   }
 
   render() {
+    const { metaDescription, pageTitle, slug } = this.props.data
     return (
       <div>
         <div className="form-section">
@@ -15,15 +16,21 @@ class SearchEngine extends React.Component {
         </div>
         <div className="form-section">
           <label> Page title</label>
-          <Input onChange={this.handleChangeInputField("page_title")}/>
+          <Input
+            value={pageTitle}
+            onChange={this.handleChangeInputField("page_title")} />
         </div>
         <div className="form-section">
           <label> Meta description</label>
-          <Input.TextArea onChange={this.handleChangeInputField("meta_description")} />
+          <Input.TextArea
+            value={metaDescription}
+            onChange={this.handleChangeInputField("meta_description")} />
         </div>
         <div className="form-section">
           <label> Url and handle</label>
-          <Input/>
+          <Input
+            defaultValue={slug}
+          />
         </div>
       </div>
     )

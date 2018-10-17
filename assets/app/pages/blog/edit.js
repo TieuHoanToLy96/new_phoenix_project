@@ -5,7 +5,7 @@ import SearchEngine from "components/Excerpt/SearchEngine"
 import SelectPublish from "components/SelectComponent/SelectPublish"
 import SelectImage from "components/SelectComponent/SelectImage"
 import SelectCategory from "components/SelectComponent/SelectCategory"
-import { createBlogPost, changeInputField } from "pages/blog/_all/actions"
+import { createBlogPost, changeInputField, getEditBlog, setEditBlog, updateEditBlog } from "pages/blog/_all/actions"
 import { Row, Col, Icon, Divider } from "antd"
 import { history } from "store"
 import { connect } from "react-redux"
@@ -15,13 +15,33 @@ class BlogEdit extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      loadding: false
     }
   }
+  componentDidMount() {
+    const postId = this.props.history.location.state ?.id || null
+    console.log(postId, "postID")
+    if (postId) {
+      this.props.getEditBlog(postId).then(() => {
+
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.setEditBlog({})
+  }
+
   handleSaveBlog = () => {
-    this.props.createBlogPost(this.props.editPost).then(() => {
-      console.log("create finish")
-    })
+    const postId = this.props.history.location.state ?.id || null
+    if (postId) {
+      this.props.updateEditBlog(this.props.editPost)
+    } else {
+      this.props.createBlogPost(this.props.editPost).then(() => {
+        console.log("create finish")
+      })
+    }
+
   }
 
   handleChangeInputField = (field, value) => {
@@ -29,6 +49,7 @@ class BlogEdit extends Component {
   }
 
   render() {
+    const { editPost } = this.props
     return (
       <div className="wrapper-content mb-30">
         <Row>
@@ -57,10 +78,11 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <TitleAndContent
-                      data={{ value: "ahihi" }}
+                      data={{ name: editPost.name || "", content: editPost.content || "" }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
-                  </div></div>
+                  </div>
+                </div>
               </Col>
             </Row>
             <Row className="mb-30">
@@ -68,6 +90,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <ExcerptComponent
+                      data={{ excerpt: editPost.excerpt || "" }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>
@@ -78,6 +101,11 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SearchEngine
+                      data={{
+                        pageTitle: editPost.page_title || "",
+                        metaDescription: editPost.meta_description || "",
+                        slug: editPost.slug || ""
+                      }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div>
@@ -91,6 +119,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectPublish
+                      data={editPost.is_published}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>
@@ -101,6 +130,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectImage
+
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div>
@@ -113,6 +143,10 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectCategory
+                      data={{
+                        category: editPost.category || "",
+                        author: editPost.author || ""
+                      }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div>
@@ -150,7 +184,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createBlogPost: params => dispatch(createBlogPost(params)),
-    changeInputField: (field, value) => dispatch(changeInputField(field, value))
+    changeInputField: (field, value) => dispatch(changeInputField(field, value)),
+    getEditBlog: id => dispatch(getEditBlog(id)),
+    setEditBlog: post => dispatch(setEditBlog(post)),
+    updateEditBlog: params => dispatch(updateEditBlog(params))
   }
 }
 

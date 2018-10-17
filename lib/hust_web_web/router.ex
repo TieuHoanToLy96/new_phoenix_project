@@ -36,8 +36,10 @@ defmodule HustWebWeb.Router do
     pipe_through :api
     scope "/admin" do
       scope "/blogs" do
-        get("/get_all", BlogController, :get_all)
+        post("/update_blog", BlogController, :update)
+        post("/get_blog", BlogController, :get_blog)
         post("/create_blog", BlogController, :create)
+        post("/get_all", BlogController, :get_all)
       end
     end
   end

@@ -3,6 +3,7 @@ defmodule HustWebWeb.BlogView do
   def render("blog_just_loaded.json", blog) do
     blog
     |> Map.take([
+      :id,
       :name,
       :slug,
       :content,
@@ -13,7 +14,8 @@ defmodule HustWebWeb.BlogView do
       :is_pinned,
       :excerpt,
       :page_title,
-      :meta_description
+      :meta_description,
+      :inserted_at
     ])
   end
 end

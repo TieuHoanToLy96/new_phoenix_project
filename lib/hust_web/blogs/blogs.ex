@@ -21,7 +21,8 @@ defmodule HustWeb.Blogs do
         b in Blog,
         where: b.is_deleted == false,
         limit: ^entries,
-        offset: ^offset
+        offset: ^offset,
+        order_by: [asc: :inserted_at]
       )
     total_entries =
     Repo.one(
@@ -35,11 +36,26 @@ defmodule HustWeb.Blogs do
     {:ok, data, total_entries}
   end
 
-  # def update_blog(%Blog{} = blog, attrs) do
-  #   blog
-  #   |> Blog.changeset(attrs)
-  #   |> Repo.update()
-  # end
+  def update_blog(blog_params) do
+    update_blog =
+      blog_params
+      |> Map.put("slug", Slugger.slugify(blog_params["name"] || ""))
+
+    Repo.get!(Blog, blog_params["id"])
+    |> Blog.changeset(update_blog)
+    |> Repo.update()
+  end
+
+  def get_blog_by_id(id) do
+    query =
+      from(
+        b in Blog,
+        where: b.is_deleted == false and b.id == ^id
+      )
+   {:ok, Repo.one(query)}
+  end
+
+
 
   # def change_blog(%Blog{} = blog) do
   #   Blog.changeset(blog, %{})

@@ -21,7 +21,7 @@ const routes = [
             component: BlogList
           },
           {
-            path: "/admin/blog/edit/:blog_id",
+            path: "/admin/blog/edit",
             component: BlogEdit
           },
           {

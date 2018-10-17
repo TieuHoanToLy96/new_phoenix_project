@@ -9,9 +9,10 @@ class ExcerptComponent extends React.Component{
     let value = e.target ? e.target.value : e
     this.props.handleChangeInputField(field, value)
   }
+  
   render(){
     const froalaConfig = ["undo", "redo", "|", "fontSize", "fontFamily", "color", , "bold", "italic", "underline", "strikeThrough", "outdent", "indent", "clearFormatting", "insertLink", "fullscreen"]
-
+    const {excerpt} = this.props.data
     return(
      
         <div className="form-section no-margin">
@@ -20,7 +21,7 @@ class ExcerptComponent extends React.Component{
             <FroalaEditor
               config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
               tag="textarea"
-              model={""}
+              model={excerpt}
               onModelChange={this.handleChangeInputField("excerpt")}
             />
           </div>
