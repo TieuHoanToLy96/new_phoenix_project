@@ -24,9 +24,9 @@ defmodule HustWebWeb.Router do
 
     # Use the default browser stack
 
-    scope "/" do
-      get("/", PageController, :index)
-    end
+    # scope "/" do
+    #   get("/", PageController, :index)
+    # end
     pipe_through(:app)
     get("/*path", PageController, :app)
   end

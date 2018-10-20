@@ -1,8 +1,6 @@
-import BlogEdit from "../pages/blog/edit";
-
 const HocAuthentication = (Component) => {
   class HigherOrderComponent extends React.Component {
-    render() {BlogEdit
+    render() {
       return (
         <Component {...this.props} />
       )
