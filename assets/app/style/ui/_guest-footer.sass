@@ -1,0 +1,81 @@
+.g-footer
+  &:before
+    content: "";
+    background-image: url('https://demo.mythemeshop.com/school/wp-content/themes/school/images/white-paper.png');
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 32px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  position: relative;
+  width: 100%;
+  background: #f0f0f0;
+  &--wrapper
+    padding-top: 75px;
+    margin-bottom: 40px;
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 50px
+    @media screen and (max-width: 400px)
+      grid-template-columns: 1fr
+  &--item
+    &__wrapper
+      .mst-about-us
+        p
+          color: #6a7d87;
+        strong
+          font-family: 'Roboto Slab';
+          font-weight: normal;
+          font-size: 14px;
+          color: #6a7d87;
+          
+        .school
+          &-name
+            margin-top: 50px;
+    &__title
+      padding-bottom: 0;
+      margin-bottom: 40px;
+      color: #222;
+      padding-top: 0;
+      font-size: 25px;
+      font-family: 'Roboto Slab';
+      font-weight: 700
+.open-hours
+  .open-p
+    overflow: hidden;
+    border-bottom: 1px dashed #B8BABC;
+    margin-bottom: 15px;
+  .open-hours-title
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 1;
+  .open-hours-time
+    font-size: 20px;
+    font-weight: bold;
+    color: #353E43;
+    margin-bottom: 12px;
+  
+  &-img
+    float: left;
+    font-size: 26px;
+    color: #353e43;
+    margin-right: 25px;
+  &-li
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px dashed #B8BABC;
+    .inner-ul
+  .break-p
+    .break-time
+      color: #353E43;
+      font-weight: bold;  
+  .closed
+    .closed-msg
+  .open-hours-li:last-child 
+    padding-bottom: 0
+    border-bottom: 0

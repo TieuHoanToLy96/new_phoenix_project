@@ -1,10 +1,11 @@
-import React, { Component } from "react"
-import { Icon, Table, Pagination, Row, Col, Input, Tag } from "antd"
-import { fetchBlogList } from "actions"
 import { connect } from "react-redux"
+import React, { Component } from "react"
+import { fetchCategoryList, setEditCategory } from "pages/category/_all/actions"
+import { Icon, Table, Pagination, Row, Col, Input, Tag } from "antd"
 import { history } from "store"
 
-class BlogList extends Component {
+class CategoryList extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -12,34 +13,33 @@ class BlogList extends Component {
       loadding: false
     }
   }
+
   componentDidMount() {
     const { page } = this.state
     this.setState({ loadding: true })
-    this.props.fetchBlogList(10, page).then(() => {
+    this.props.dispatch(fetchCategoryList(1, 10)).then(() => {
       this.setState({ loadding: false })
-    }
-    )
+    })
   }
 
-  handleAddBlog = () => {
-    history.push("/admin/blog/new")
+  handleAddCategory = () => {
+    history.push("/admin/category/new")
   }
 
   handleChangePagination = (page, pageSize) => {
     this.setState({ page: page })
-    this.props.fetchBlogList(10, page).then(() => {
+    this.props.dispatch(fetchCategoryList(page, 10)).then(() => {
       this.setState({ loadding: false })
-    }
-    )
+    })
   }
 
-  handleClickBlog = (record, index) => {
-    history.push(`/admin/blog/edit?id=${record.id}`, {id: record.id})
+  handleClickCategory = (record, index) => {
+    history.push(`/admin/category/edit?id=${record.id}`, { id: record.id })
   }
 
   render() {
     const { loadding, page } = this.state
-    const { blogList, total_entries } = this.props
+    const { categoryList, total_entries } = this.props
     return (
       <div className="wrapper-content mb-30">
         {loadding ?
@@ -51,14 +51,14 @@ class BlogList extends Component {
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
                     <div className="ui-title-bar__navigation"
-                      onClick={() => history.push("/admin/blog/list")}
+                      onClick={() => history.push("/admin/category/list")}
                     >
                       <Icon type="left" theme="outlined" />
-                      <div>Blog posts</div>
+                      <div>Categories</div>
                     </div>
                     <div className="ui-title-bar__main">
                       <div className="ui-title-bar__title no-margin">
-                        <h1>Blog post</h1>
+                        <h1>Categories</h1>
                       </div>
                     </div>
                   </div>
@@ -67,16 +67,10 @@ class BlogList extends Component {
             </Row>
             <div className="ui-page--actions is-full-width">
               <div className="ui-page--action__wrapper ">
-                {/* <Input.Search
-                  placeholder="Search blog"
-                  enterButton="Search"
-                  size= "large"
-                  onSearch={value => console.log(value)}
-                /> */}
                 <div className="is-flex is-row is-full-width is-full-height is-flex-end">
-                  <Input placeholder="Search blog" style={{ height: 40 }} />
-                  <div onClick={this.handleAddBlog} className="default-button default-button--save">
-                    Add blog
+                  <Input placeholder="Search category" style={{ height: 40 }} />
+                  <div onClick={this.handleAddCategory} className="default-button default-button--save">
+                    Add category
                 </div>
 
                 </div>
@@ -88,33 +82,23 @@ class BlogList extends Component {
                 <Table
                   className="mb-30"
                   pagination={false}
-                  dataSource={blogList}
+                  dataSource={categoryList}
                   rowKey={record => record.id}
                   onRow={(record, index) => {
-                    return { onClick: () => { this.handleClickBlog(record, index) } }
+                    return { onClick: () => { this.handleClickCategory(record, index) } }
                   }}
-                  >
+                >
                   <Table.Column
                     title="Name"
                     dataIndex="name"
                     key="name"
                   />
                   <Table.Column
-                    title="Category"
-                    dataIndex="category"
-                    key="category"
-                  />
-                  <Table.Column
-                    title="Author"
-                    dataIndex="author"
-                    key="author"
-                  />
-                  <Table.Column
                     title="Status"
                     key="status"
                     render={(text, record) => (
                       <div>
-                      {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
                       </div>
                     )}
                   />
@@ -126,10 +110,10 @@ class BlogList extends Component {
 
                 </Table>
 
-                <Pagination 
-                className="text-center"
-                onChange={this.handleChangePagination}
-                current={page} total={total_entries} />
+                <Pagination
+                  className="text-center"
+                  onChange={this.handleChangePagination}
+                  current={page} total={total_entries} />
               </div>
             </div>
 
@@ -138,19 +122,20 @@ class BlogList extends Component {
       </div>
     )
   }
+
 }
 
 const mapStateToProps = state => {
   return {
-    blogList: state.blog.blogList,
-    total_entries: state.blog.total_entries
+    categoryList: state.category.categoryList,
+    total_entries: state.category.total_entries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchBlogList: (entries, page) => dispatch(fetchBlogList(entries, page))
+    dispatch
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogList)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)

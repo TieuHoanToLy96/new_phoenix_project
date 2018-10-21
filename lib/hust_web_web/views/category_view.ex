@@ -1,22 +1,20 @@
-defmodule HustWebWeb.BlogView do
-  alias HustWebWeb.BlogView
-  def render("blog_just_loaded.json", blog) do
-    blog
+defmodule HustWebWeb.CategoryView do
+  alias HustWebWeb.CategoryView
+  def render("category_just_loaded.json", category) do
+    category
     |> Map.take([
       :id,
       :name,
       :slug,
       :content,
       :images,
-      :author,
       :is_published,
       :is_deleted,
-      :is_pinned,
       :excerpt,
       :page_title,
       :meta_description,
       :inserted_at,
-      :category_id
+      :updated_at
     ])
   end
 end

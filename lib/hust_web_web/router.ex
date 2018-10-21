@@ -41,6 +41,13 @@ defmodule HustWebWeb.Router do
         post("/create_blog", BlogController, :create)
         post("/get_all", BlogController, :get_all)
       end
+
+      scope "/categories" do
+        post("/get_all", CategoryController, :get_all)
+        post("/create_category", CategoryController, :create)
+        post("/get_category", CategoryController, :get_category)
+        post("/update_category", CategoryController, :update)
+      end
     end
   end
 end

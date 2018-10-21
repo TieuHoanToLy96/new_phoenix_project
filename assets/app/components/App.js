@@ -1,7 +1,7 @@
 import { renderRoutes } from 'react-router-config'
 import HocAuthentication from '../hocs/HocAuthentication'
 
-class App extends React.Component {
+class App extends React.Component {P
   render() {
     return (
       <div style={{ height: '100%' }}>

@@ -15,6 +15,7 @@ defmodule HustWeb.Blogs do
   end
 
   def get_blog_by_entries(entries, page) do
+    IO.inspect(entries, label: "entriessss")
     offset = (page-1)*entries
     query =
       from(

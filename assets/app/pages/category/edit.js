@@ -1,56 +1,52 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
+
+import {Row, Col, Icon, Divider} from "antd"
+
 import TitleAndContent from 'components/TitleAndContent/index'
 import ExcerptComponent from "components/Excerpt/index"
 import SearchEngine from "components/Excerpt/SearchEngine"
 import SelectPublish from "components/SelectComponent/SelectPublish"
 import SelectImage from "components/SelectComponent/SelectImage"
-import SelectCategory from "components/SelectComponent/SelectCategory"
-import { createBlogPost, changeInputField, getEditBlog, setEditBlog, updateEditBlog } from "pages/blog/_all/actions"
-import {fetchCategoryList} from "actions"
-import { Row, Col, Icon, Divider } from "antd"
-import { history } from "store"
-import { connect } from "react-redux"
 
-class BlogEdit extends Component {
+import {history} from "store"
+import { fetchCategoryList, updateCategory, createCategory, setEditCategory, getEditCategory } from "actions"
+import {changeInputField} from "pages/category/_all/actions"
+
+class CategoryEdit extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      loadding: false
-    }
   }
+
   componentDidMount() {
-    const postId = this.props.history.location.state ?.id || null
-    console.log(postId, "postID")
-    if (postId) {
-      this.props.fetchCategoryList(1, 20)
-      this.props.getEditBlog(postId).then(() => {
-      })
+    const categoryId = this.props.history.location.state ?.id || null
+    if (categoryId) {
+      this.props.dispatch(getEditCategory(categoryId))
     }
+   
   }
 
   componentWillUnmount() {
-    this.props.setEditBlog({})
+    this.props.dispatch(setEditCategory({}))
   }
 
-  handleSaveBlog = () => {
-    const postId = this.props.history.location.state ?.id || null
-    if (postId) {
-      this.props.updateEditBlog(this.props.editPost)
-    } else {
-      this.props.createBlogPost(this.props.editPost).then(() => {
-        console.log("create finish")
-      })
-    }
-
-  }
 
   handleChangeInputField = (field, value) => {
-    this.props.changeInputField(field, value)
+    this.props.dispatch(changeInputField(field, value))
+  }
+
+  handleSaveCategory = () => {
+    const categoryId = this.props.history.location.state ?.id || null
+    if (categoryId) {
+      this.props.dispatch(updateCategory(this.props.editCategory))
+    } else {
+      this.props.dispatch(createCategory(this.props.editCategory))
+    }
   }
 
   render() {
-    const { editPost } = this.props
+    const {editCategory} = this.props
     return (
       <div className="wrapper-content mb-30">
         <Row>
@@ -58,14 +54,14 @@ class BlogEdit extends Component {
             <div className="ui-title-bar">
               <div className="ui-title-bar--wrapper">
                 <div className="ui-title-bar__navigation"
-                  onClick={() => history.push("/admin/blog/list")}
+                  onClick={() => history.push("/admin/category/list")}
                 >
                   <Icon type="left" theme="outlined" />
-                  <div>Blog posts</div>
+                  <div>Categories</div>
                 </div>
                 <div className="ui-title-bar__main">
                   <div className="ui-title-bar__title">
-                    <h1>Blog post</h1>
+                    <h1>Categories</h1>
                   </div>
                 </div>
               </div>
@@ -79,7 +75,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <TitleAndContent
-                      data={{ name: editPost.name || "", content: editPost.content || "" }}
+                      data={{ name: editCategory.name || "", content: editCategory.content || "" }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div>
@@ -91,7 +87,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <ExcerptComponent
-                      data={{ excerpt: editPost.excerpt || "" }}
+                      data={{ excerpt: editCategory.excerpt || "" }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>
@@ -103,9 +99,9 @@ class BlogEdit extends Component {
                   <div className="ui-card__section">
                     <SearchEngine
                       data={{
-                        pageTitle: editPost.page_title || "",
-                        metaDescription: editPost.meta_description || "",
-                        slug: editPost.slug || ""
+                        pageTitle: editCategory.page_title || "",
+                        metaDescription: editCategory.meta_description || "",
+                        slug: editCategory.slug || ""
                       }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
@@ -120,7 +116,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectPublish
-                      data={editPost.is_published}
+                      data={editCategory.is_published}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>
@@ -139,22 +135,6 @@ class BlogEdit extends Component {
               </Col>
             </Row>
 
-            <Row >
-              <Col>
-                <div className="ui-card">
-                  <div className="ui-card__section">
-                    <SelectCategory
-                      data={{
-                        categories: this.props.categories,
-                        category: editPost.category || "",
-                        author: editPost.author || ""
-                      }}
-                      handleChangeInputField={this.handleChangeInputField}
-                    />
-                  </div>
-                </div>
-              </Col>
-            </Row>
           </Col>
 
         </Row>
@@ -162,37 +142,29 @@ class BlogEdit extends Component {
         <div className="ui-page--actions is-full-width">
           <div className="ui-page--action__wrapper is-flex is-row is-flex-end">
             <div className="is-flex is-row">
-              <a className="default-button mr-15" href="/admin/blog/list"> Cancle </a>
-              <div onClick={this.handleSaveBlog} className="default-button default-button--save">
+              <a className="default-button mr-15" href="/admin/category/list"> Cancle </a>
+              <div onClick={this.handleSaveCategory} className="default-button default-button--save">
                 Save
               </div>
             </div>
           </div>
         </div>
 
-
-      </div >
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    blogList: state.blog.blogList,
-    editPost: state.blog.editPost, 
-    categories: state.category.categoryList
+    editCategory: state.category.editCategory
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createBlogPost: params => dispatch(createBlogPost(params)),
-    changeInputField: (field, value) => dispatch(changeInputField(field, value)),
-    getEditBlog: id => dispatch(getEditBlog(id)),
-    setEditBlog: post => dispatch(setEditBlog(post)),
-    updateEditBlog: params => dispatch(updateEditBlog(params)), 
-    fetchCategoryList: (page, entries) => dispatch(fetchCategoryList(page, entries))
+    dispatch
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogEdit)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryEdit)

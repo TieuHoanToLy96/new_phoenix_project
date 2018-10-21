@@ -1,4 +1,5 @@
 import { Menu, Icon, Button } from "antd"
+import {history} from "store"
 const SubMenu = Menu.SubMenu
 class MainLayout extends React.Component {
   constructor(props) {
@@ -11,6 +12,9 @@ class MainLayout extends React.Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
+  }
+  handleClickMenu = (e) => {
+    history.push(e.key)
   }
   render() {
     const { collapsed } = this.state
@@ -64,6 +68,7 @@ class MainLayout extends React.Component {
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
+                onClick={this.handleClickMenu}
               >
                 <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Dashboard</span></span>}>
                   <Menu.Item key="5">Statistic</Menu.Item>
@@ -73,7 +78,7 @@ class MainLayout extends React.Component {
                 </SubMenu>
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Blog</span></span>}>
                   <Menu.Item key="/admin/blog/list">Blog List</Menu.Item>
-                  <Menu.Item key="/admin/blog/categories">Blog Categories</Menu.Item>
+                  <Menu.Item key="/admin/category/list">Blog Categories</Menu.Item>
                   <Menu.Item key="1/admin/blog/tag">Blog Tag</Menu.Item>
                   {/* <SubMenu key="sub3" title="Submenu">
                     <Menu.Item key="11">Option 11</Menu.Item>

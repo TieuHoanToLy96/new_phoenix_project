@@ -1,13 +1,22 @@
-class Guest extends React.Component {
+class MainLayoutGuest extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
+  openMobileMenu = () => {
+    let mask = document.getElementById("gmask")
+    let mobileMenu = document.getElementById("mobileMenu")
+    let mobileMenuContent = document.getElementById("mobileMenuContent")
+    mask.style.display = "block"
+    mobileMenu.style.width = "300px"
+    mobileMenuContent.style.display = "block"
   }
-  
 
+  closeMobileMenu = () => {
+    let mask = document.getElementById("gmask")
+    let mobileMenu = document.getElementById("mobileMenu")
+    let mobileMenuContent = document.getElementById("mobileMenuContent")
+    mask.style.display = "none"
+    mobileMenu.style.width = "0"
+    mobileMenuContent.style.display = "none"
+  }
   render() {
     return (
       <div className="g-main-container">
@@ -53,12 +62,12 @@ class Guest extends React.Component {
                     <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>He thong nhung</a></li>
                     <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Arm Linux</a></li>
                     {/* <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Xu ly anh OpenCV</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh Linux driver</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh mang</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Thiet bi thuc hanh</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Video</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Bai tap tham khao</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lien he</a></li> */}
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh Linux driver</a></li>
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh mang</a></li>
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Thiet bi thuc hanh</a></li>
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Video</a></li>
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Bai tap tham khao</a></li>
+                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lien he</a></li> */}
 
                     <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home ">
                       <a>BLog</a>
@@ -93,82 +102,8 @@ class Guest extends React.Component {
           </div>
 
         </div>
-
-        <div className="g-intro-container">
-          <div className="g-container is-padding-container">
-            <div className="g-highlight">
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: " #2bd4f3" }}>
-                    <i className="fa fa-lightbulb-o hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Imagine</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: "#ea0d60" }}>
-                    <i className="fa fa-puzzle-piece hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Create</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: "#2bd4f3 " }}>
-                    <i className="fa fa-graduation-cap hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Learn</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: "#dd3333" }}>
-                    <i className="fa fa-heart-o hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Think</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: "#2bd4f3" }}>
-                    <i className="fa fa-dropbox hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Play</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-              <div className="g-highlight-item">
-                <div className="g-top-line">
-                  <span className="g-highlight-icon" style={{ color: "#81d742" }}>
-                    <i className="fa fa-dropbox hg highlight-head-icon-color"></i>
-                  </span>
-                </div>
-                <h3 className="g-highlight-title">Teach</h3>
-                <p className="g-highlight-desc">Lorem ipsum dolor sit met, consectetur adipiscing elit. Vivamus bibendum diam non ultrices condimentum.</p>
-              </div>
-
-              <div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div className="g-noti">
-          <div className="container is-padding-container">
-            <div className="g-noti--wrapper">
-              <div className="g-noti--item">
-
-              </div>
-            </div>
-          </div>
+        <div className="g-container is-padding-container">
+          {this.props.children}
         </div>
 
         <div className="g-footer">
@@ -266,5 +201,4 @@ class Guest extends React.Component {
       </div>
     )
   }
-}
-export default Guest
+} export default MainLayoutGuest

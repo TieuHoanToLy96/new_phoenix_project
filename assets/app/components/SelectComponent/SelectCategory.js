@@ -9,6 +9,7 @@ class SelectCategory extends React.Component {
     }
   }
 
+  
   handleChange = field =>  value => {
     this.setState(update(this.state, {
       [field]: {$set: value}
@@ -26,12 +27,13 @@ class SelectCategory extends React.Component {
           showSearch
           placeholder="Select a category"
           optionFilterProp="children"
-          onChange={this.handleChange("category")}
+          onChange={this.handleChange("category_id")}
           value={category || this.props.data.category}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
-          <Select.Option value="Mon 1">Mon 1</Select.Option>
-          <Select.Option value="Mon 2">Mon 2</Select.Option>
+          {this.props.data.categories.map(el => <Select.Option value={el.id}>{el.name}</Select.Option> )}
+          {/* <Select.Option value="Mon 1">Mon 1</Select.Option> */}
+          {/* <Select.Option value="Mon 2">Mon 2</Select.Option> */}
           
         </Select>
         <h1>Author</h1>
@@ -43,6 +45,7 @@ class SelectCategory extends React.Component {
           value={author || this.props.data.author}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
+       
           <Select.Option value="jack">Jack</Select.Option>
           <Select.Option value="ma">Ma</Select.Option>
           

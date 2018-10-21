@@ -2,6 +2,14 @@
   display: flex
   flex-direction: column
   background-color: #f4f6f8
+  a
+    text-decoration: none !important
+    color: #000000 !important
+  h2
+    font-family: 'Roboto Slab';
+    font-weight: 700;
+    font-size: 24px;
+    color: #353e43;
 .body-html
   font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif
 .wrapper-content
@@ -31,10 +39,14 @@
   &-15
     margin-bottom: 15px
   &-30
-    margin-bottom: 30px
+    margin-bottom: 30px !important
+  &-50
+    margin-bottom: 50px
   &-100
     margin-bottom: 100px
 .ml
+  &-15
+    margin-left: 15px
   &-100
     margin-left: 100px
 .is
@@ -96,4 +108,10 @@
 
 .devider
   color: #dfe3e8
+.is-padding-container
+  padding-left: 20px
+  padding-right: 20px
+  @media screen and (max-width: 769px)
+    padding-left: 10px
+    padding-right: 10px
 

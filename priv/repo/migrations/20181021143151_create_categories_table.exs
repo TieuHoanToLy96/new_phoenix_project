@@ -1,8 +1,10 @@
-defmodule HustWeb.Repo.Migrations.CreateBlogs do
+defmodule HustWeb.Repo.Migrations.CreateCategoriesTable do
   use Ecto.Migration
 
   def up do
-    create table(:blogs) do
+    drop_if_exists(table(:categories))
+
+    create table(:categories) do
       add :name, :text
       add :slug, :string
       add :content, :text
@@ -10,18 +12,17 @@ defmodule HustWeb.Repo.Migrations.CreateBlogs do
       add :page_title, :text
       add :images, {:array, :string}
       add :meta_description, :text
-      add :author, :string
       add :is_deleted, :boolean, default: false
       add :is_published, :boolean, default: false
-      add :is_pinned, :boolean, default: false
-      belongs_to(:category, Categories, foreign_key: :category_id)
 
       timestamps()
     end
-    create index(:blogs, [:slug, :is_deleted], where: "is_deleted = false")
+
+    create index(:categories, [:slug, :is_deleted], where: "is_deleted = false")
   end
 
   def down do
-    drop table(:blogs)
+    drop(table(:categories))
   end
+
 end
