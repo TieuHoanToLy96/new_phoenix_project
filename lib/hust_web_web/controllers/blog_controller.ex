@@ -7,10 +7,7 @@ defmodule HustWebWeb.BlogController do
   alias HustWebWeb.BlogView
 
   action_fallback HustWeb.FallbackController
-  # def get_all(conn, %{"params" => params}) do
-  #   IO.inspect(params, label: "parmassss")
-  #   json(conn, %{sucess: true})
-  # end
+
   def get_all(conn, %{"entries" => entries, "page" => page}) do
 
     entries_number =
