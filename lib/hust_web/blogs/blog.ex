@@ -17,6 +17,8 @@ defmodule HustWeb.Blogs.Blog do
     field(:page_title, :string)
     field(:meta_description, :string)
 
+    belongs_to(:category, BlogCategories, foreign_key: :category_id)
+
     timestamps()
   end
   def changeset(%Blog{} = blog, attrs) do

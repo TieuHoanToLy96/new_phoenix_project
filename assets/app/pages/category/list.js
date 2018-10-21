@@ -1,7 +1,10 @@
 import { connect } from "react-redux"
-import { fetChCategoryList } from "pages/category/_all/actions"
+import React, { Component } from "react"
+import { fetchCategoryList, setEditCategory } from "pages/category/_all/actions"
+import { Icon, Table, Pagination, Row, Col, Input, Tag } from "antd"
+import { history } from "store"
 
-class CategoryList extends React.Component {
+class CategoryList extends Component {
 
   constructor(props) {
     super(props)
@@ -10,34 +13,33 @@ class CategoryList extends React.Component {
       loadding: false
     }
   }
+
   componentDidMount() {
     const { page } = this.state
     this.setState({ loadding: true })
-    this.props.fetChCategoryList(10, page).then(() => {
+    this.props.dispatch(fetchCategoryList(1, 10)).then(() => {
       this.setState({ loadding: false })
-    }
-    )
+    })
   }
 
-  handleAddBlog = () => {
+  handleAddCategory = () => {
     history.push("/admin/category/new")
   }
 
   handleChangePagination = (page, pageSize) => {
     this.setState({ page: page })
-    this.props.fetChCategoryList(10, page).then(() => {
+    this.props.dispatch(fetchCategoryList(page, 10)).then(() => {
       this.setState({ loadding: false })
-    }
-    )
+    })
   }
 
-  handleClickBlog = (record, index) => {
+  handleClickCategory = (record, index) => {
     history.push(`/admin/category/edit?id=${record.id}`, { id: record.id })
   }
 
   render() {
     const { loadding, page } = this.state
-    const { blogList, total_entries } = this.props
+    const { categoryList, total_entries } = this.props
     return (
       <div className="wrapper-content mb-30">
         {loadding ?
@@ -65,15 +67,9 @@ class CategoryList extends React.Component {
             </Row>
             <div className="ui-page--actions is-full-width">
               <div className="ui-page--action__wrapper ">
-                {/* <Input.Search
-                  placeholder="Search blog"
-                  enterButton="Search"
-                  size= "large"
-                  onSearch={value => console.log(value)}
-                /> */}
                 <div className="is-flex is-row is-full-width is-full-height is-flex-end">
                   <Input placeholder="Search category" style={{ height: 40 }} />
-                  <div onClick={this.handleAddBlog} className="default-button default-button--save">
+                  <div onClick={this.handleAddCategory} className="default-button default-button--save">
                     Add category
                 </div>
 
@@ -89,7 +85,7 @@ class CategoryList extends React.Component {
                   dataSource={categoryList}
                   rowKey={record => record.id}
                   onRow={(record, index) => {
-                    return { onClick: () => { this.handleClickBlog(record, index) } }
+                    return { onClick: () => { this.handleClickCategory(record, index) } }
                   }}
                 >
                   <Table.Column
@@ -98,14 +94,13 @@ class CategoryList extends React.Component {
                     key="name"
                   />
                   <Table.Column
-                    title="Category"
-                    dataIndex="category"
-                    key="category"
-                  />
-                  <Table.Column
-                    title="Author"
-                    dataIndex="author"
-                    key="author"
+                    title="Status"
+                    key="status"
+                    render={(text, record) => (
+                      <div>
+                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                      </div>
+                    )}
                   />
                   <Table.Column
                     title="Inserted at"
@@ -127,18 +122,20 @@ class CategoryList extends React.Component {
       </div>
     )
   }
+
 }
 
-const mapStateTpProps = state => {
+const mapStateToProps = state => {
   return {
     categoryList: state.category.categoryList,
     total_entries: state.category.total_entries
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
-    fetChCategoryList: (page, entries) => dispatch(fetChCategoryList(page, entries))
+    dispatch
   }
 }
 
-export default connect(mapStateTpProps, mapDispatchToProps)(CategoryList)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)

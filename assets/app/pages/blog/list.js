@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import { Icon, Table, Pagination, Row, Col, Input } from "antd"
-import { fetchBlogList } from "pages/blog/_all/actions"
+import { Icon, Table, Pagination, Row, Col, Input, Tag } from "antd"
+import { fetchBlogList } from "actions"
 import { connect } from "react-redux"
 import { history } from "store"
-import axios from "axios"
+
 class BlogList extends Component {
   constructor(props) {
     super(props)
@@ -108,6 +108,15 @@ class BlogList extends Component {
                     title="Author"
                     dataIndex="author"
                     key="author"
+                  />
+                  <Table.Column
+                    title="Status"
+                    key="status"
+                    render={(text, record) => (
+                      <div>
+                      {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                      </div>
+                    )}
                   />
                   <Table.Column
                     title="Inserted at"

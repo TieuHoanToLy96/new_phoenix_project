@@ -20,7 +20,7 @@ defmodule HustWebWeb.CategoryController do
         :error -> 10
       end
 
-    with {:ok, categories, total} <- Categories.get_category_by_entries(page, entries) do
+    with {:ok, categories, total} <- Categories.get_category_by_entries(page_number, entries_number) do
       categories = categories |> Enum.map( fn el -> CategoryView.render("category_just_loaded.json", el) end)
 
       json(conn, %{
@@ -30,6 +30,36 @@ defmodule HustWebWeb.CategoryController do
       })
 
     end
+  end
+
+  def create(conn, %{"params" => params}) do
+    with {:ok, category} <- Categories.create_category(params) do
+      IO.inspect(category)
+      json(conn, %{
+        success: true,
+        category: CategoryView.render("category_just_loaded.json", category)
+      })
+    end
+  end
+
+  def update(conn, %{"params" => params}) do
+    IO.inspect(params)
+    with {:ok, u_category} <- Categories.update_category(params) do
+      IO.inspect(u_category)
+      json(conn, %{
+        success: true,
+        update_category: CategoryView.render("category_just_loaded.json", u_category)
+      })
+    end
+  end
+
+  def get_category(conn, %{"id" => id}) do
+      with {:ok, category} <- Categories.get_category_by_id(id) do
+        json(conn, %{
+          success: true,
+          edit_category: CategoryView.render("category_just_loaded.json", category)
+        })
+      end
   end
 
 end

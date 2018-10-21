@@ -1,7 +1,7 @@
 defmodule HustWebWeb.CategoryView do
   alias HustWebWeb.CategoryView
-  def render("categories_just_loaded.json", blog) do
-    blog
+  def render("category_just_loaded.json", category) do
+    category
     |> Map.take([
       :id,
       :name,
@@ -13,7 +13,7 @@ defmodule HustWebWeb.CategoryView do
       :excerpt,
       :page_title,
       :meta_description,
-      :inserted_at, 
+      :inserted_at,
       :updated_at
     ])
   end

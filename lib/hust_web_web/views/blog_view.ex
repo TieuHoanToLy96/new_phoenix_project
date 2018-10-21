@@ -15,7 +15,8 @@ defmodule HustWebWeb.BlogView do
       :excerpt,
       :page_title,
       :meta_description,
-      :inserted_at
+      :inserted_at,
+      :category_id
     ])
   end
 end

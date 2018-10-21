@@ -9,7 +9,6 @@ defmodule HustWebWeb.BlogController do
   action_fallback HustWeb.FallbackController
 
   def get_all(conn, %{"entries" => entries, "page" => page}) do
-
     entries_number =
       case Integer.parse(entries) do
         {value, _ } -> value

@@ -6,6 +6,7 @@ import SelectPublish from "components/SelectComponent/SelectPublish"
 import SelectImage from "components/SelectComponent/SelectImage"
 import SelectCategory from "components/SelectComponent/SelectCategory"
 import { createBlogPost, changeInputField, getEditBlog, setEditBlog, updateEditBlog } from "pages/blog/_all/actions"
+import {fetchCategoryList} from "actions"
 import { Row, Col, Icon, Divider } from "antd"
 import { history } from "store"
 import { connect } from "react-redux"
@@ -22,8 +23,8 @@ class BlogEdit extends Component {
     const postId = this.props.history.location.state ?.id || null
     console.log(postId, "postID")
     if (postId) {
+      this.props.fetchCategoryList(1, 20)
       this.props.getEditBlog(postId).then(() => {
-
       })
     }
   }
@@ -144,6 +145,7 @@ class BlogEdit extends Component {
                   <div className="ui-card__section">
                     <SelectCategory
                       data={{
+                        categories: this.props.categories,
                         category: editPost.category || "",
                         author: editPost.author || ""
                       }}
@@ -177,7 +179,8 @@ class BlogEdit extends Component {
 const mapStateToProps = state => {
   return {
     blogList: state.blog.blogList,
-    editPost: state.blog.editPost
+    editPost: state.blog.editPost, 
+    categories: state.category.categoryList
   }
 }
 
@@ -187,7 +190,8 @@ const mapDispatchToProps = dispatch => {
     changeInputField: (field, value) => dispatch(changeInputField(field, value)),
     getEditBlog: id => dispatch(getEditBlog(id)),
     setEditBlog: post => dispatch(setEditBlog(post)),
-    updateEditBlog: params => dispatch(updateEditBlog(params))
+    updateEditBlog: params => dispatch(updateEditBlog(params)), 
+    fetchCategoryList: (page, entries) => dispatch(fetchCategoryList(page, entries))
   }
 }
 
