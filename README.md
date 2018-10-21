@@ -6,6 +6,7 @@ To start your Phoenix server:
     * Install dependencies with `mix deps.get`
     * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
     * Install nodemodule: `cd assets && npm install`
+    * Exit make bash: `exit`
   * Start with: `make file`
 
 Visit [`localhost:9900/admin/blog`] go to admin page.
