@@ -79,7 +79,7 @@ class MainLayout extends React.Component {
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Blog</span></span>}>
                   <Menu.Item key="/admin/blog/list">Blog List</Menu.Item>
                   <Menu.Item key="/admin/category/list">Blog Categories</Menu.Item>
-                  <Menu.Item key="1/admin/blog/tag">Blog Tag</Menu.Item>
+                  <Menu.Item key="/admin/navigation/list">Navigation</Menu.Item>
                   {/* <SubMenu key="sub3" title="Submenu">
                     <Menu.Item key="11">Option 11</Menu.Item>
                     <Menu.Item key="12">Option 12</Menu.Item>

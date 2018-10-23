@@ -8,17 +8,12 @@ class BlogList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: 1,
-      loadding: false
+      page: 1
     }
   }
   componentDidMount() {
     const { page } = this.state
-    this.setState({ loadding: true })
-    this.props.fetchBlogList(10, page).then(() => {
-      this.setState({ loadding: false })
-    }
-    )
+    this.props.fetchBlogList(10, page)
   }
 
   handleAddBlog = () => {
@@ -27,10 +22,7 @@ class BlogList extends Component {
 
   handleChangePagination = (page, pageSize) => {
     this.setState({ page: page })
-    this.props.fetchBlogList(10, page).then(() => {
-      this.setState({ loadding: false })
-    }
-    )
+    this.props.fetchBlogList(10, page)
   }
 
   handleClickBlog = (record, index) => {
@@ -38,11 +30,11 @@ class BlogList extends Component {
   }
 
   render() {
-    const { loadding, page } = this.state
-    const { blogList, total_entries } = this.props
+    const { page } = this.state
+    const { blogList, total_entries, isLoaddingList } = this.props
     return (
       <div className="wrapper-content mb-30">
-        {loadding ?
+        {isLoaddingList ?
           <Icon style={{ color: "black" }} type="loadding" />
           :
           <div>
@@ -143,7 +135,8 @@ class BlogList extends Component {
 const mapStateToProps = state => {
   return {
     blogList: state.blog.blogList,
-    total_entries: state.blog.total_entries
+    total_entries: state.blog.total_entries, 
+    isLoaddingList: state.blog.isLoaddingList
   }
 }
 

@@ -1,5 +1,7 @@
 import BlogIndex from "pages/blog/index"
 import CategoryIndex from "pages/category/index"
+import NavigationIndex from "pages/navigation/index"
+
 import MainLayout from "./layouts/main_layout"
 import MainLayoutGuest from "./layouts/main_layout_guest"
 import HocLayout from "./hocs/HocLayout"
@@ -8,8 +10,11 @@ import HocLayoutGuest from "./hocs/HocLayoutGuest"
 import App from "components/App"
 import BlogEdit from "pages/blog/edit"
 import CategoryEdit from "pages/category/edit"
+import NavigationEdit from "pages/navigation/edit"
+
 import BlogList from "pages/blog/list"
 import CategoryList from "pages/category/list"
+import NavigationList from "pages/navigation/list"
 
 import BlogPost from "./guest/blog/blog_post"
 import HomeGuest from "./guest/home";
@@ -44,7 +49,7 @@ const routes = [
           {
             path: "/admin/category/list",
             component: CategoryList
-          },
+          }, 
           {
             path: "/admin/category/edit",
             component: CategoryEdit
@@ -53,6 +58,25 @@ const routes = [
             path: "/admin/category/new",
             component: CategoryEdit
           }
+        ]
+      },
+      {
+        path: "/admin/navigation",
+        component: NavigationIndex, 
+        routes: [
+          {
+            path: "/admin/navigation/list",
+            component: NavigationList
+          },
+         
+          {
+            path: "/admin/navigation/new",
+            component: NavigationEdit
+          },
+           {
+            path: "/admin/navigation/edit",
+            component: NavigationEdit
+          },
         ]
       }
     ]

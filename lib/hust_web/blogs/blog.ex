@@ -17,7 +17,7 @@ defmodule HustWeb.Blogs.Blog do
     field(:page_title, :string)
     field(:meta_description, :string)
 
-    belongs_to(:category, BlogCategories, foreign_key: :category_id)
+    belongs_to(:category, Categories, foreign_key: :category_id)
 
     timestamps()
   end
@@ -34,7 +34,8 @@ defmodule HustWeb.Blogs.Blog do
         :is_pinned,
         :excerpt,
         :page_title,
-        :meta_description
+        :meta_description,
+        :category_id
       ])
       |> validate_required([:slug])
   end

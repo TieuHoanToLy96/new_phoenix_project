@@ -48,6 +48,10 @@ defmodule HustWebWeb.Router do
         post("/get_category", CategoryController, :get_category)
         post("/update_category", CategoryController, :update)
       end
+
+      scope "/navigations" do
+        post("/create_navigation", NavigationController, :create)
+      end
     end
   end
 end

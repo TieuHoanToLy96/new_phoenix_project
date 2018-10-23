@@ -146,7 +146,7 @@ class BlogEdit extends Component {
                     <SelectCategory
                       data={{
                         categories: this.props.categories,
-                        category: editPost.category || "",
+                        categorId: editPost.category_id || "",
                         author: editPost.author || ""
                       }}
                       handleChangeInputField={this.handleChangeInputField}

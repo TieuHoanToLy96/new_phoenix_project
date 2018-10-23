@@ -57,7 +57,9 @@ export const getEditBlog = id => {
 export const fetchBlogList = (entries, page) => {
   return dispatch => {
     const url = `/api/admin/blogs/get_all?entries=${entries}&page=${page}`
-    
+    dispatch({
+      type:  "BLOG::FETCH_BLOG_LIST"
+    })
     return sendPost(url, null)
     .then(res => {
       if(res.status == 200 && res.data.success == true){
