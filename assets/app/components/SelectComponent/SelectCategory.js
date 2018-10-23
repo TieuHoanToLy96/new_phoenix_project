@@ -4,7 +4,7 @@ class SelectCategory extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      category: this.props.data.category,
+      categoryId: this.props.data.categoryId,
       author: this.props.data.author
     }
   }
@@ -19,7 +19,8 @@ class SelectCategory extends React.Component {
   }
 
   render() {
-    const { category, author } = this.state
+    const { categoryId, author } = this.state
+    console.log(categoryId, this.props.data.categoryId)
     return (
       <div className="form-section">
         <h1>Category</h1>
@@ -28,10 +29,11 @@ class SelectCategory extends React.Component {
           placeholder="Select a category"
           optionFilterProp="children"
           onChange={this.handleChange("category_id")}
-          value={category || this.props.data.category}
+          value={categoryId || this.props.data.categoryId}
+          // value={1}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
-          {this.props.data.categories.map(el => <Select.Option value={el.id}>{el.name}</Select.Option> )}
+          {this.props.data.categories.map((el, index) => <Select.Option key={index} value={el.id}>{el.name}</Select.Option> )}
           {/* <Select.Option value="Mon 1">Mon 1</Select.Option> */}
           {/* <Select.Option value="Mon 2">Mon 2</Select.Option> */}
           
@@ -46,8 +48,8 @@ class SelectCategory extends React.Component {
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
        
-          <Select.Option value="jack">Jack</Select.Option>
-          <Select.Option value="ma">Ma</Select.Option>
+          <Select.Option value="TieuHoan">TieuHoan</Select.Option>
+          <Select.Option value="ToLy">ToLy</Select.Option>
           
         </Select>
       </div>

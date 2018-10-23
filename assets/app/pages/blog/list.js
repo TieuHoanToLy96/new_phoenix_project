@@ -8,17 +8,12 @@ class BlogList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: 1,
-      loadding: false
+      page: 1
     }
   }
   componentDidMount() {
     const { page } = this.state
-    this.setState({ loadding: true })
-    this.props.fetchBlogList(10, page).then(() => {
-      this.setState({ loadding: false })
-    }
-    )
+    this.props.fetchBlogList(10, page)
   }
 
   handleAddBlog = () => {
@@ -27,22 +22,19 @@ class BlogList extends Component {
 
   handleChangePagination = (page, pageSize) => {
     this.setState({ page: page })
-    this.props.fetchBlogList(10, page).then(() => {
-      this.setState({ loadding: false })
-    }
-    )
+    this.props.fetchBlogList(10, page)
   }
 
   handleClickBlog = (record, index) => {
-    history.push(`/admin/blog/edit?id=${record.id}`, {id: record.id})
+    history.push(`/admin/blog/edit?id=${record.id}`, { id: record.id })
   }
 
   render() {
-    const { loadding, page } = this.state
-    const { blogList, total_entries } = this.props
+    const { page } = this.state
+    const { blogList, total_entries, isLoaddingList } = this.props
     return (
       <div className="wrapper-content mb-30">
-        {loadding ?
+        {isLoaddingList ?
           <Icon style={{ color: "black" }} type="loadding" />
           :
           <div>
@@ -50,10 +42,7 @@ class BlogList extends Component {
               <Col span={24}>
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
-                    <div className="ui-title-bar__navigation"
-                      onClick={() => history.push("/admin/blog/list")}
-                    >
-                      <Icon type="left" theme="outlined" />
+                    <div className="ui-title-bar__navigation"  >
                       <div>Blog posts</div>
                     </div>
                     <div className="ui-title-bar__main">
@@ -93,7 +82,7 @@ class BlogList extends Component {
                   onRow={(record, index) => {
                     return { onClick: () => { this.handleClickBlog(record, index) } }
                   }}
-                  >
+                >
                   <Table.Column
                     title="Name"
                     dataIndex="name"
@@ -103,6 +92,11 @@ class BlogList extends Component {
                     title="Category"
                     dataIndex="category"
                     key="category"
+                    render={(text, record) => (
+                      <div>
+                        {record.category ? record.category.name : ""}
+                      </div>
+                    )}
                   />
                   <Table.Column
                     title="Author"
@@ -114,7 +108,7 @@ class BlogList extends Component {
                     key="status"
                     render={(text, record) => (
                       <div>
-                      {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
                       </div>
                     )}
                   />
@@ -126,10 +120,10 @@ class BlogList extends Component {
 
                 </Table>
 
-                <Pagination 
-                className="text-center"
-                onChange={this.handleChangePagination}
-                current={page} total={total_entries} />
+                <Pagination
+                  className="text-center"
+                  onChange={this.handleChangePagination}
+                  current={page} total={total_entries} />
               </div>
             </div>
 
@@ -143,7 +137,8 @@ class BlogList extends Component {
 const mapStateToProps = state => {
   return {
     blogList: state.blog.blogList,
-    total_entries: state.blog.total_entries
+    total_entries: state.blog.total_entries,
+    isLoaddingList: state.blog.isLoaddingList
   }
 }
 

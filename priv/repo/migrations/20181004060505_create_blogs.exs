@@ -14,7 +14,6 @@ defmodule HustWeb.Repo.Migrations.CreateBlogs do
       add :is_deleted, :boolean, default: false
       add :is_published, :boolean, default: false
       add :is_pinned, :boolean, default: false
-      belongs_to(:category, Categories, foreign_key: :category_id)
 
       timestamps()
     end

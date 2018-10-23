@@ -1,5 +1,10 @@
-class MainLayoutGuest extends React.Component {
+import { connect } from "react-redux"
+import { getNavigation, getNavigations } from "../pages/navigation/_all/actions";
 
+class MainLayoutGuest extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(getNavigations())
+  }
   openMobileMenu = () => {
     let mask = document.getElementById("gmask")
     let mobileMenu = document.getElementById("mobileMenu")
@@ -18,6 +23,7 @@ class MainLayoutGuest extends React.Component {
     mobileMenuContent.style.display = "none"
   }
   render() {
+    const { navigations } = this.props
     return (
       <div className="g-main-container">
         <div id="gmask" className="g-mask" onClick={this.closeMobileMenu}> </div>
@@ -58,24 +64,26 @@ class MainLayoutGuest extends React.Component {
                   </a>
 
                   <ul>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a>Home</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>He thong nhung</a></li>
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Arm Linux</a></li>
-                    {/* <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Xu ly anh OpenCV</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh Linux driver</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lap trinh mang</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Thiet bi thuc hanh</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Video</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Bai tap tham khao</a></li>
-                  <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home "><a>Lien he</a></li> */}
-
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home ">
-                      <a>BLog</a>
-                      <ul className='sub-menu'>
-                        <li id="menu-item-185" className="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://demo.mythemeshop.com/school/page-example/">Page Example</a></li>
-                        <li id="menu-item-185" className="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://demo.mythemeshop.com/school/page-example/">Page Example</a></li>
-                      </ul>
-                    </li>
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a>Home</a></li>
+                    {navigations.length && navigations.filter(el => el.name == "header").map(el => el.settings)[0].map((el, index) => {
+                      return (
+                        <li key={index} className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home ">
+                          <a href={`${el.url}`}>{el.title}</a>
+                          {el.children && el.children.length > 0 &&
+                            <ul className='sub-menu'>
+                              {
+                                el.children.map(elem => {
+                                  return (
+                                    <li className="menu-item menu-item-type-post_type menu-item-object-page">
+                                    <a href={elem.url}>{elem.title}</a></li>
+                                  )
+                                })
+                              }
+                            </ul>
+                          }
+                        </li>
+                      )
+                    })}
 
                   </ul>
                 </nav>
@@ -201,4 +209,19 @@ class MainLayoutGuest extends React.Component {
       </div>
     )
   }
-} export default MainLayoutGuest
+}
+
+
+const mapStateToProps = state => {
+  return {
+    navigations: state.navigation.navigations
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainLayoutGuest)
