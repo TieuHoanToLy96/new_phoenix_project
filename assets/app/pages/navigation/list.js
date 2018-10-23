@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
-import { Row, Col, Table, Modal, Input } from "antd"
-import {history} from "store"
+import { Row, Col, Table, Modal, Input, Button, Tag, Icon } from "antd"
+import { history } from "store"
 import { createNavigation } from "actions"
+import { getNavigations, updateNavigation, setTreeData, setEditNavigation } from './_all/actions';
 
 class NavigationList extends React.Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class NavigationList extends React.Component {
       showModal: false,
       name: ""
     }
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getNavigations())
   }
 
   closeModal = () => {
@@ -38,12 +43,27 @@ class NavigationList extends React.Component {
     }
 
     this.props.dispatch(createNavigation(navigation))
-    this.closeModal()
     history.push("/admin/navigation/new ")
+    this.closeModal()
   }
 
-  handClickNavigation = () => {
-    history.push("/admin/navigation/edit")
+  handClickNavigation = (record, index) => {
+    let navigation = {
+      name: record.name,
+      treeData: record.settings
+    }
+    this.props.dispatch(setEditNavigation(navigation))
+    history.push("/admin/navigation/edit", { id: record.id })
+  }
+
+  handleChangeCurrent = record  => e => {
+    e.stopPropagation()
+    this.props.dispatch(updateNavigation({ is_published: !record.is_published }, record.id, "update"))
+  }
+
+  handleRemoveNavigation = id => e => {
+    e.stopPropagation()
+    this.props.dispatch(updateNavigation({is_deleted: true}, id, "delete"))
   }
 
   render() {
@@ -121,8 +141,27 @@ class NavigationList extends React.Component {
                     key="name"
                   />
                   <Table.Column
-                    title="Status"
+                    title="Change"
                     key="status"
+                    render={(record) => (
+                      <div>
+                        {record.is_published ? <Tag color="green">Published</Tag> : <Tag color="red">Hidden</Tag>}
+                      </div>
+                    )}
+                  />
+                  <Table.Column
+                    title="Action"
+                    key="action"
+                    render={(record) => (
+                      <div className="button-tree is-flex">
+                        <button style={{ verticalAlign: 'middle' }} onClick={this.handleChangeCurrent(record)}>
+                          Change
+                        </button>
+                        <div className="button-tree--delete is-flex" onClick={this.handleRemoveNavigation(record.id)}>
+                          <Icon type="delete" theme="outlined" />
+                        </div>
+                      </div>
+                    )}
                   />
                 </Table>
               </div>

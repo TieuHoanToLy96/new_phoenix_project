@@ -4,7 +4,9 @@ defmodule  HustWeb.Navigations.Navigation do
       alias HustWeb.Navigations.Navigation
       schema "navigations" do
             field(:name, :string)
-            field(:settings, :map, default: %{})
+            field(:is_published, :boolean, default: false)
+            field(:settings, {:array, :map})
+            field(:is_deleted, :boolean, default: false)
             timestamps()
       end
 
@@ -12,7 +14,8 @@ defmodule  HustWeb.Navigations.Navigation do
             navigation
             |> cast(attrs, [
                   :name,
-                  :settings
+                  :settings,
+                  :is_published
             ])
             |> validate_required([:name])
       end

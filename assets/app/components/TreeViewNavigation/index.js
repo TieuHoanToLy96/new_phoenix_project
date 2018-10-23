@@ -1,6 +1,6 @@
-import SortableTree from 'react-sortable-tree';
+import SortableTree, {removeNodeAtPath} from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-minimal';
-import {Icon} from "antd"
+import { Icon } from "antd"
 import { connect } from 'react-redux';
 import { setTreeData } from '../../pages/navigation/_all/actions';
 import { field } from '../../pages/navigation/_all/reducer';
@@ -8,10 +8,6 @@ class TreeViewNavigation extends React.Component {
 
   constructor(props) {
     super(props)
-    // this.state = {
-    //   treeData: [{ title: 'src/', children: [{ title: 'index.js' }] }],
-    // }
-
   }
 
   handleDragTreeNode = treeData => {
@@ -25,12 +21,18 @@ class TreeViewNavigation extends React.Component {
   }
 
   handleRemoveNode = (nodeInfo) => {
-
+    let newTree = removeNodeAtPath({
+      treeData: this.props.treeData,
+      path: nodeInfo.path,
+      getNodeKey: ({ treeIndex }) => treeIndex
+    })
+    console.log(newTree)
+    this.props.dispatch(setTreeData(newTree))
   }
 
   renderType = type => {
-    switch(type){
-      case field.POSTS: return "Blog" 
+    switch (type) {
+      case field.POSTS: return "Blog"
       case field.CATEGORY: return "Category"
       default: return ""
     }
@@ -79,8 +81,8 @@ class TreeViewNavigation extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return{
-    treeData: state.navigation.treeData
+  return {
+    treeData: state.navigation.editNavigation.treeData
   }
 }
 

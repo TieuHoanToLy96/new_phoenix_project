@@ -58,7 +58,7 @@ class CollapseView extends React.Component {
         let data = {
           title: el.name,
           type: field.POSTS,
-          url: el.slug,
+          url: `/blog/${el.slug}`,
           image: el.image
         }
         select.push(data)
@@ -80,7 +80,7 @@ class CollapseView extends React.Component {
         let data = {
           title: el.name,
           type: field.CATEGORY,
-          url: el.slug,
+          url:`/categories/${el.slug}`,
           image: el.image
         }
         select.push(data)

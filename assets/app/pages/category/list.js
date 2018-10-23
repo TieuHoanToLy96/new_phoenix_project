@@ -50,10 +50,7 @@ class CategoryList extends Component {
               <Col span={24}>
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
-                    <div className="ui-title-bar__navigation"
-                      onClick={() => history.push("/admin/category/list")}
-                    >
-                      <Icon type="left" theme="outlined" />
+                    <div className="ui-title-bar__navigation" >
                       <div>Categories</div>
                     </div>
                     <div className="ui-title-bar__main">

@@ -2,20 +2,42 @@ import { connect } from "react-redux";
 import { Col, Row, Button, Icon, Input } from "antd"
 import CollapseView from "components/CollapseView/index"
 import TreeViewNavigation from "components/TreeViewNavigation/index"
-import { saveNavigation } from "./_all/actions";
+import { saveNavigation, changeNameNavigation, getNavigation, updateNavigation } from "./_all/actions"
+import { history } from "store"
 
 class NavigationEdit extends React.Component {
 
   handleSaveNavigation = () => {
-    console.log(this.props.treeData)
+    console.log(this.props.history.location)
+    const { name, treeData } = this.props.editNavigation
+    const navigationId = this.props.history.location.state ?.id || null
+
     let params = {
-      name: "",
-      settings: this.props.treeData
+      name: name,
+      settings: treeData
     }
-    // this.props.dispatch(saveNavigation(params))
+    if(navigationId){
+      this.props.dispatch(updateNavigation(params, navigationId))
+    } else {
+      this.props.dispatch(saveNavigation(params))
+    }
+   
+  }
+
+  handleChangeName = e => {
+    let value = e.target ?.value || e
+    this.props.dispatch(changeNameNavigation(value))
+  }
+
+  componentDidMount() {
+    const navigationId = this.props.history.location.state ?.id || null
+    if (navigationId) {
+      this.props.dispatch(getNavigation(navigationId))
+    }
   }
 
   render() {
+    const { name } = this.props.editNavigation
     return (
       <div className="wrapper-content mb-30">
         <Row>
@@ -71,7 +93,6 @@ class NavigationEdit extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    treeData: state.navigation.treeData,
     editNavigation: state.navigation.editNavigation
   }
 }

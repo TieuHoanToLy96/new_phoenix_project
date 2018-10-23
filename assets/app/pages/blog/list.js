@@ -26,7 +26,7 @@ class BlogList extends Component {
   }
 
   handleClickBlog = (record, index) => {
-    history.push(`/admin/blog/edit?id=${record.id}`, {id: record.id})
+    history.push(`/admin/blog/edit?id=${record.id}`, { id: record.id })
   }
 
   render() {
@@ -42,10 +42,7 @@ class BlogList extends Component {
               <Col span={24}>
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
-                    <div className="ui-title-bar__navigation"
-                      onClick={() => history.push("/admin/blog/list")}
-                    >
-                      <Icon type="left" theme="outlined" />
+                    <div className="ui-title-bar__navigation"  >
                       <div>Blog posts</div>
                     </div>
                     <div className="ui-title-bar__main">
@@ -85,7 +82,7 @@ class BlogList extends Component {
                   onRow={(record, index) => {
                     return { onClick: () => { this.handleClickBlog(record, index) } }
                   }}
-                  >
+                >
                   <Table.Column
                     title="Name"
                     dataIndex="name"
@@ -95,6 +92,11 @@ class BlogList extends Component {
                     title="Category"
                     dataIndex="category"
                     key="category"
+                    render={(text, record) => (
+                      <div>
+                        {record.category ? record.category.name : ""}
+                      </div>
+                    )}
                   />
                   <Table.Column
                     title="Author"
@@ -106,7 +108,7 @@ class BlogList extends Component {
                     key="status"
                     render={(text, record) => (
                       <div>
-                      {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
                       </div>
                     )}
                   />
@@ -118,10 +120,10 @@ class BlogList extends Component {
 
                 </Table>
 
-                <Pagination 
-                className="text-center"
-                onChange={this.handleChangePagination}
-                current={page} total={total_entries} />
+                <Pagination
+                  className="text-center"
+                  onChange={this.handleChangePagination}
+                  current={page} total={total_entries} />
               </div>
             </div>
 
@@ -135,7 +137,7 @@ class BlogList extends Component {
 const mapStateToProps = state => {
   return {
     blogList: state.blog.blogList,
-    total_entries: state.blog.total_entries, 
+    total_entries: state.blog.total_entries,
     isLoaddingList: state.blog.isLoaddingList
   }
 }

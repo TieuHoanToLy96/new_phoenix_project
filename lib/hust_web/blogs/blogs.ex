@@ -3,6 +3,7 @@ defmodule HustWeb.Blogs do
   import Ecto.Query, only: [from: 2]
   alias HustWeb.Repo
   alias HustWeb.Blogs.Blog
+  alias HustWeb.Categories.Category
 
   def create_post(blog_params) do
     IO.inspect(blog_params)
@@ -17,13 +18,21 @@ defmodule HustWeb.Blogs do
   def get_blog_by_entries(entries, page) do
     IO.inspect(entries, label: "entriessss")
     offset = (page-1)*entries
+
+    query_category =
+      from(
+        c in Category,
+        where: c.is_deleted == false
+      )
+
     query =
       from(
         b in Blog,
         where: b.is_deleted == false,
         limit: ^entries,
         offset: ^offset,
-        order_by: [asc: :inserted_at]
+        order_by: [asc: :inserted_at],
+        preload: [category: ^query_category]
       )
     total_entries =
     Repo.one(
@@ -33,7 +42,7 @@ defmodule HustWeb.Blogs do
         select: count("*")
       )
     )
-    data = query |> Repo.all()
+    data = query |> Repo.all() |> IO.inspect(label: "bloglist")
     {:ok, data, total_entries}
   end
 
@@ -48,6 +57,7 @@ defmodule HustWeb.Blogs do
   end
 
   def get_blog_by_id(id) do
+
     query =
       from(
         b in Blog,

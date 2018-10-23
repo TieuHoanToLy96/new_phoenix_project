@@ -51,6 +51,9 @@ defmodule HustWebWeb.Router do
 
       scope "/navigations" do
         post("/create_navigation", NavigationController, :create)
+        post("/get_all", NavigationController, :get_all)
+        post("/update", NavigationController, :update)
+        post("/get_navigation", NavigationController, :get_navigation)
       end
     end
   end
