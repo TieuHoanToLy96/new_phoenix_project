@@ -34,12 +34,16 @@ defmodule HustWebWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", HustWebWeb do
     pipe_through :api
+
     scope "/admin" do
       scope "/blogs" do
         post("/update_blog", BlogController, :update)
         post("/get_blog", BlogController, :get_blog)
         post("/create_blog", BlogController, :create)
         post("/get_all", BlogController, :get_all)
+        post("/get_pinned_blogs", BlogController, :get_pinned_blogs)
+        post("/get_recent_blogs", BlogController, :get_recent_blogs)
+        post("/:slug", BlogController, :get_blog_by_slug)
       end
 
       scope "/categories" do
@@ -47,6 +51,7 @@ defmodule HustWebWeb.Router do
         post("/create_category", CategoryController, :create)
         post("/get_category", CategoryController, :get_category)
         post("/update_category", CategoryController, :update)
+        post("/:slug", CategoryController, :get_category_by_slug)
       end
 
       scope "/navigations" do

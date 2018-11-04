@@ -3,7 +3,6 @@ import 'froala-editor/css/froala_style.min.css';
 import "froala-editor/css/froala_editor.pkgd.min.css"
 import FroalaEditor from "react-froala-wysiwyg"
 import 'font-awesome/css/font-awesome.css'
-import FontPicker from 'font-picker-react';
 import { Input } from "antd"
 
 class TitleAndContent extends React.Component {

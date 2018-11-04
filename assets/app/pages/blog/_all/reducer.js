@@ -3,23 +3,25 @@ const initState = {
   blogList: [],
   editPost: {},
   total_entries: 0,
-  isLoadingList: false, 
-  isLoaded: false
+  isLoadingList: false,
+  isLoaded: false,
+  pinnedBlogs: [],
+  recentBlogs: []
 }
 export default (state = initState, action) => {
   switch (action.type) {
     case "BLOG::FETCH_BLOG_LIST":
       return update(state, {
-        isLoadingList: {$set: false}
+        isLoadingList: { $set: false }
       })
     case "BLOG::FETCH_BLOG_LIST_FAIL":
       return update(state, {
-        isLoadingList: {$set: fasle}
+        isLoadingList: { $set: fasle }
       })
     case "BLOG::FETCH_BLOG_LIST_SUCCESS":
       return update(state, {
-        isLoaded: {$set: true},
-        isLoadingList: {$set: false},
+        isLoaded: { $set: true },
+        isLoadingList: { $set: false },
         blogList: { $set: action.payload.blog_list },
         total_entries: { $set: action.payload.total_entries }
       })
@@ -48,8 +50,18 @@ export default (state = initState, action) => {
     }
     case "BLOG::UPDATE_BLOG_POST_SUCCESS": {
       return update(state, {
-        
         editPost: { $set: action.payload }
+      })
+    }
+    case "BLOG::GET_RECENT_BLOGS_SUCCESS": {
+      return update(state, {
+        recentBlogs: { $set: action.payload }
+      })
+    }
+
+    case "BLOG::GET_PINNED_BLOGS_SUCCESS": {
+      return update(state, {
+        pinnedBlogs: { $set: action.payload }
       })
     }
     default: return state

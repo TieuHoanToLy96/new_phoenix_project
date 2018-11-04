@@ -117,7 +117,13 @@ class CategoryEdit extends React.Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectPublish
-                      data={editCategory.is_published}
+                      value={editCategory.is_published}
+                      data={{
+                        title: "Hiển thị",
+                        title1: "Hiện",
+                        title2: "Ẩn",
+                        field: "is_published"
+                      }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>

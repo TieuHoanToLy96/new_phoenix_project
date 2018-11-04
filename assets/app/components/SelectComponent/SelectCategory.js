@@ -47,6 +47,7 @@ class SelectCategory extends React.Component {
           value={author || this.props.data.author}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
+        <Select.Option value="ThuanPV">ThuanPV</Select.Option>
        
           <Select.Option value="TieuHoan">TieuHoan</Select.Option>
           <Select.Option value="ToLy">ToLy</Select.Option>

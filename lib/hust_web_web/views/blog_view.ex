@@ -18,14 +18,15 @@ defmodule HustWebWeb.BlogView do
         :page_title,
         :meta_description,
         :inserted_at,
-        :category_id
+        :category_id,
+        :image_binary
       ])
 
     data =
       case blog |> Map.fetch(:category) do
         {:ok, %Ecto.Association.NotLoaded{} } -> data
         {:ok, value} ->
-          if(!is_nil(value)) do
+          if value do
             data |> Map.put(:category, CategoryView.render("category_just_loaded.json", value))
           else
             data

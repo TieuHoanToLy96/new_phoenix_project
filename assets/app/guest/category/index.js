@@ -1,5 +1,6 @@
 import { Row, Col, Input, Tabs } from "antd"
-
+import { connect } from "react-redux"
+import { getCategoryBySlug, getRecentBlogs, getPinnedBlogs } from "actions"
 class CategoryGuest extends React.Component {
   constructor(props) {
     super(props)
@@ -20,74 +21,84 @@ class CategoryGuest extends React.Component {
     e.currentTarget.className = newClass
   }
 
+  componentDidMount() {
+    console.log("location", this.props.location.pathname)
+    let slug = this.props.location.pathname.split("/")[2]
+    this.props.getCategoryBySlug(slug)
+    this.props.getPinnedBlogs()
+    this.props.getRecentBlogs()
+  }
+
+  renderBlogs = () => {
+    const { categoryBySlug } = this.props
+    if (categoryBySlug && categoryBySlug.blogs) {
+      return categoryBySlug.blogs.map(blog =>
+        <div key={blog.id} className="g-article--item mb-50">
+          <div className="g-article--item__wrapper">
+            <div className="g-article--item__img">
+              <img src={blog.image_binary || "https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-688x350.jpeg"} />
+            </div>
+            <div className="g-article--item__content is-flex is-column">
+              <div className="article-info">
+                <span className="article-date"><span>{blog.inserted_at}</span></span>
+                <span className="article-author"><i className="fa fa-user"></i> <span ><a >{blog.author}</a></span></span>
+                <span className="article-categories">Categories:
+                  <a>{categoryBySlug.name}</a>
+                </span>
+              </div>
+
+              <h2 className="article-title" ><a>{blog.name}</a></h2>
+              {/* <p className="article-description"> */}
+              <p> {blog.excerpt}</p>
+              {/* </p> */}
+
+              <div className="article-readmore">
+                <a href={`/blogs/${blog.slug}`}>
+                  Read More
+              </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )
+    } else {
+      return <div>Không có bài viết nào</div>
+    }
+  }
+
+  renderPinnedRecentBlogs = (blogs) => {
+    return blogs.map(blog =>
+      <div key={blog.id} className="article-pin--item">
+        <div className="is-flex is-row">
+          <div className="article-pin__img">
+            <img src={blog.image_binary || "https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg"} />
+          </div>
+          <div className="article-pin__title is-flex-1 ml-15">
+            {blog.name}
+          </div>
+        </div>
+        <div className="article-pin__date">
+          {blog.inserted_at}
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const { pinPost } = this.state
+    const { pinnedBlogs, recentBlogs } = this.props.blog
     return (
       <div className="mb-50 mt-30">
         <Row>
           <Col lg={14} md={24}>
             <div className="g-article--list">
-              <div className="g-article--item mb-50">
-                <div className="g-article--item__wrapper">
-                  <div className="g-article--item__img">
-                    <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-688x350.jpeg" />
-                  </div>
-                  <div className="g-article--item__content is-flex is-column">
-                    <div className="article-info">
-                      <span className="article-date"><span>March 26, 2014</span></span>
-                      <span className="article-author"><i className="fa fa-user"></i> <span ><a >MyThemeShop</a></span></span>
-                      <span className="article-categories">Categories:
-                        <a>Apps</a>
-                        <a>Gadgets</a></span>
-                    </div>
-
-                    <h2 className="article-title" ><a>After outcry, Microsoft changes course and won’t access user data in theft probes</a></h2>
-                    <p className="article-description">
-                      Eaque ipsa quae ab illo inventore veritatis et quasi. Eaque ipsa quae ab illo inventore veritatis et quasi. Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. Et Harum Qidem Rerum Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis …
-                    </p>
-
-                    <div className="article-readmore">
-                      <a>
-                        Read More
-                      </a>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div className="g-article--item mb-50">
-                <div className="g-article--item__wrapper">
-                  <div className="g-article--item__img">
-                    <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-688x350.jpeg" />
-                  </div>
-                  <div className="g-article--item__content is-flex is-column">
-                    <div className="article-info">
-                      <span className="article-date"><span>March 26, 2014</span></span>
-                      <span className="article-author"><i className="fa fa-user"></i> <span ><a >MyThemeShop</a></span></span>
-                      <span className="article-categories">Categories:
-                        <a>Apps</a>
-                        <a>Gadgets</a></span>
-                    </div>
-
-                    <h2 className="article-title" ><a>After outcry, Microsoft changes course and won’t access user data in theft probes</a></h2>
-                    <p className="article-description">
-                      Eaque ipsa quae ab illo inventore veritatis et quasi. Eaque ipsa quae ab illo inventore veritatis et quasi. Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. Et Harum Qidem Rerum Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis …
-                    </p>
-
-                    <div className="article-readmore">
-                      <a>
-                        Read More
-                      </a>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+              {this.renderBlogs()}
+              p
 
             </div>
           </Col>
           <Col lg={{ span: 8, offset: 1 }} md={{ span: 24 }}>
-
             <div className="search mb-30">
               <Input.Search className="mb-30" />
               <div className="g-side-article">
@@ -99,68 +110,15 @@ class CategoryGuest extends React.Component {
                     <div className="tab-title" onClick={this.handleChangeTab("tab-title", "tab-title is-select")}>
                       <a> Recent post</a>
                     </div>
-
-
                   </div>
                   {
                     pinPost ?
                       <div className="article-pin--list">
-                        <div className="article-pin--item">
-                          <div className="is-flex is-row">
-                            <div className="article-pin__img">
-                              <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg" />
-                            </div>
-                            <div className="article-pin__title is-flex-1 ml-15">
-                              After outcry, Microsoft changes course and won’t access user data in theft probes
-                              </div>
-                          </div>
-                          <div className="article-pin__date">
-                            March 26, 2014
-                            </div>
-                        </div>
-                        <div className="article-pin--item">
-                          <div className="is-flex is-row">
-                            <div className="article-pin__img">
-                              <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg" />
-                            </div>
-                            <div className="article-pin__title is-flex-1 ml-15">
-                              After outcry, Microsoft changes course and won’t access user data in theft probes
-                              </div>
-                          </div>
-                          <div className="article-pin__date">
-                            March 26, 2014
-                            </div>
-                        </div>
-
+                        {this.renderPinnedRecentBlogs(pinnedBlogs)}
                       </div>
                       :
                       <div className="article-pin--list">
-                        <div className="article-pin--item">
-                          <div className="is-flex is-row">
-                            <div className="article-pin__img">
-                              <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg" />
-                            </div>
-                            <div className="article-pin__title is-flex-1 ml-15">
-                              After outcry, Microsoft changes course and won’t access user data in theft probes
-                              </div>
-                          </div>
-                          <div className="article-pin__date">
-                            March 26, 2014
-                            </div>
-                        </div>
-                        <div className="article-pin--item">
-                          <div className="is-flex is-row">
-                            <div className="article-pin__img">
-                              <img src="https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg" />
-                            </div>
-                            <div className="article-pin__title is-flex-1 ml-15">
-                              AHihi After outcry, Microsoft changes course and won’t access user data in theft probes
-                            </div>
-                          </div>
-                          <div className="article-pin__date">
-                            March 26, 2014
-                          </div>
-                        </div>
+                        {this.renderPinnedRecentBlogs(recentBlogs)}
                       </div>
                   }
                 </div>
@@ -182,4 +140,19 @@ class CategoryGuest extends React.Component {
   }
 }
 
-export default CategoryGuest
+const mapStateToProps = state => {
+  return {
+    categoryBySlug: state.category.category,
+    category: state.category,
+    blog: state.blog
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCategoryBySlug: slug => dispatch(getCategoryBySlug(slug)),
+    getPinnedBlogs: () => dispatch(getPinnedBlogs()),
+    getRecentBlogs: () => dispatch(getRecentBlogs())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryGuest)

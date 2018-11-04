@@ -30,6 +30,33 @@ defmodule HustWebWeb.BlogController do
     end
   end
 
+  def get_recent_blogs(conn, _params) do
+    with {:ok, recent_blogs} <- Blogs.get_recent_blogs() do
+      json(conn, %{
+        success: true,
+        recent_blogs: recent_blogs |> Enum.map(fn el -> BlogView.render("blog_just_loaded.json", el) end),
+      })
+    end
+  end
+
+  def get_pinned_blogs(conn, _params) do
+      with {:ok, pinned_blogs} <- Blogs.get_pinned_blogs() do
+        json(conn, %{
+          success: true,
+          pinned_blogs: pinned_blogs |> Enum.map(fn el ->  BlogView.render("blog_just_loaded.json", el) end),
+        })
+      end
+  end
+
+  def get_blog_by_slug(conn, %{"slug" => slug}) do
+    with {:ok, blog} <- Blogs.get_blog_by_slug(slug) do
+      json(conn, %{
+        success: true,
+        blog: BlogView.render("blog_just_loaded.json", blog)
+      })
+    end
+  end
+
 
   def create(conn, %{"blog_params" => blog_params}) do
     IO.inspect(blog_params, label: "params blog")

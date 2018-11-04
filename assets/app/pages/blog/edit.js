@@ -120,7 +120,23 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectPublish
-                      data={editPost.is_published}
+                      value={editPost.is_published}
+                      data={{
+                        title: "Hiển thị",
+                        title1: "Hiện",
+                        title2: "Ẩn",
+                        field: "is_published"
+                      }}
+                      handleChangeInputField={this.handleChangeInputField}
+                    />
+                    <SelectPublish
+                      value={editPost.is_pinned}
+                      data={{
+                        title: "Ghim bài viết",
+                        title1: "Ghim",
+                        title2: "Bỏ ghim",
+                        field: "is_pinned"
+                      }}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div></div>
@@ -131,7 +147,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectImage
-
+                      image={editPost.image_binary}
                       handleChangeInputField={this.handleChangeInputField}
                     />
                   </div>

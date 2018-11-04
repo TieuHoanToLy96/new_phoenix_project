@@ -3,15 +3,16 @@ import { findIndex } from "lodash"
 const initState = {
   categoryList: [],
   editCategory: {},
-  total_entries: 0, 
-  isLoaded: false
+  total_entries: 0,
+  isLoaded: false,
+  category: {}
 }
 
 export default (state = initState, action) => {
   switch (action.type) {
     case "CATEGORY::FETCH_CATEGORY_LIST_SUCCESS":
       return update(state, {
-        isLoaded: {$set: true},
+        isLoaded: { $set: true },
         categoryList: { $set: action.payload.categories }
       })
     case "CATEGORY::SET_EDIT_CATEGORY":
@@ -31,12 +32,17 @@ export default (state = initState, action) => {
       })
     case "CATEGORY::UPDATE_CATEGORY_SUCCESS":
       return update(state, {
-        editCategory: {$set: action.payload}
+        editCategory: { $set: action.payload }
       })
-    case "CATEGORY::GET_EDIT_CATEGORY_SUCCESS": 
+    case "CATEGORY::GET_EDIT_CATEGORY_SUCCESS":
       return update(state, {
-        editCategory: {$set: action.payload}
+        editCategory: { $set: action.payload }
       })
+    case "CATEGORY::GET_CATEGORY_BY_SLUG_SUCCESS": {
+      return update(state, {
+        category: { $set: action.payload }
+      })
+    }
     default:
       return state
   }

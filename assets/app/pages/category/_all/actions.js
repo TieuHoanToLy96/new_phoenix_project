@@ -108,3 +108,24 @@ export const getEditCategory = id => {
       })
   }
 }
+
+export const getCategoryBySlug = slug => {
+  return dispatch => {
+    const url = `/api/admin/categories/${slug}`
+    return sendPost(url, null).then(res => {
+      if (res.status == 200 && res.data.success == true) {
+        dispatch({
+          type: "CATEGORY::GET_CATEGORY_BY_SLUG_SUCCESS",
+          payload: res.data.category
+        })
+      } else {
+        dispatch({
+          type: "CATEGORY::GET_CATEGORY_BY_SLUG_FAIL"
+        })
+      }
+    })
+      .catch(error => {
+        Notification.errorStrict(error, "Get fail", " by beotron")
+      })
+  }
+}
