@@ -31,7 +31,7 @@ class SelectImage extends React.Component {
     );
     return (
       <div className="form-section">
-        <h1>Featured image</h1>
+        <h1>Ảnh nổi bật</h1>
         <div className="clearfix is-flex is-row is-relative" >
           <Upload
             action="//jsonplaceholder.typicode.com/posts/"
@@ -44,7 +44,7 @@ class SelectImage extends React.Component {
           </Upload>
           <div className="is-flex is-center is-absolute is-right is-full-height ">
             <div className="default-button default-button--save">
-              Select
+            Chọn
             </div>
           </div>
           <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>

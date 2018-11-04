@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import {Row, Col, Icon, Divider} from "antd"
+import { Row, Col, Icon, Divider } from "antd"
 
 import TitleAndContent from 'components/TitleAndContent/index'
 import ExcerptComponent from "components/Excerpt/index"
@@ -9,9 +9,9 @@ import SearchEngine from "components/Excerpt/SearchEngine"
 import SelectPublish from "components/SelectComponent/SelectPublish"
 import SelectImage from "components/SelectComponent/SelectImage"
 
-import {history} from "store"
+import { history } from "store"
 import { fetchCategoryList, updateCategory, createCategory, setEditCategory, getEditCategory } from "actions"
-import {changeInputField} from "pages/category/_all/actions"
+import { changeInputField } from "pages/category/_all/actions"
 
 class CategoryEdit extends React.Component {
 
@@ -21,10 +21,11 @@ class CategoryEdit extends React.Component {
 
   componentDidMount() {
     const categoryId = this.props.history.location.state ?.id || null
+    console.log("category id", categoryId)
     if (categoryId) {
       this.props.dispatch(getEditCategory(categoryId))
     }
-   
+
   }
 
   componentWillUnmount() {
@@ -46,7 +47,7 @@ class CategoryEdit extends React.Component {
   }
 
   render() {
-    const {editCategory} = this.props
+    const { editCategory } = this.props
     return (
       <div className="wrapper-content mb-30">
         <Row>
@@ -57,11 +58,11 @@ class CategoryEdit extends React.Component {
                   onClick={() => history.push("/admin/category/list")}
                 >
                   <Icon type="left" theme="outlined" />
-                  <div>Categories</div>
+                  <div>Danh sách danh mục</div>
                 </div>
                 <div className="ui-title-bar__main">
                   <div className="ui-title-bar__title">
-                    <h1>Categories</h1>
+                    <h1>Danh mục</h1>
                   </div>
                 </div>
               </div>
@@ -142,9 +143,9 @@ class CategoryEdit extends React.Component {
         <div className="ui-page--actions is-full-width">
           <div className="ui-page--action__wrapper is-flex is-row is-flex-end">
             <div className="is-flex is-row">
-              <a className="default-button mr-15" href="/admin/category/list"> Cancle </a>
+              <a className="default-button mr-15" href="/admin/category/list"> Thoát </a>
               <div onClick={this.handleSaveCategory} className="default-button default-button--save">
-                Save
+                Lưu
               </div>
             </div>
           </div>

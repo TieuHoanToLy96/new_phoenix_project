@@ -11,23 +11,23 @@ class SearchEngine extends React.Component {
     return (
       <div>
         <div className="form-section">
-          <h1>Search engine listing preview</h1>
-          <p className="mb-15"> Add a title and description to see how this article might appear in a search engine listing</p>
+          <h1>Xem trước danh sách công cụ tìm kiếm</h1>
+          <p className="mb-15">Thêm tiêu đề và mô tả để xem bài viết này có thể xuất hiện như thế nào trong danh sách công cụ tìm kiếm</p>
         </div>
         <div className="form-section">
-          <label> Page title</label>
+          <label>Tiêu đề trang</label>
           <Input
             value={pageTitle}
             onChange={this.handleChangeInputField("page_title")} />
         </div>
         <div className="form-section">
-          <label> Meta description</label>
+          <label>Mô tả</label>
           <Input.TextArea
             value={metaDescription}
             onChange={this.handleChangeInputField("meta_description")} />
         </div>
         <div className="form-section">
-          <label> Url and handle</label>
+          <label> Đường dẫn </label>
           <Input
             defaultValue={slug}
           />

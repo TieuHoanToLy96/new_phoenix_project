@@ -132,7 +132,7 @@ class CollapseView extends React.Component {
 
             <Button onClick={this.handleAddBlogs} style={{ marginTop: 20 }}> Thêm</Button>
           </Panel>
-          <Panel header="Categories">
+          <Panel header="Danh mục">
             <Table
               rowSelection={rowSelectionCate}
               showHeader={false}

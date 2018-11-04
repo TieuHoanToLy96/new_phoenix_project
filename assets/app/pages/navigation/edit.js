@@ -48,18 +48,18 @@ class NavigationEdit extends React.Component {
                   onClick={() => history.push("/admin/navigation/list")}
                 >
                   <Icon type="left" theme="outlined" />
-                  <div>Navigation</div>
+                  <div>Danh sách điều hướng</div>
                 </div>
                 <div className="ui-title-bar__main">
                   <div className="ui-title-bar__title">
-                    <h1>Edit navigation</h1>
+                    <h1>Điều hướng</h1>
                   </div>
                 </div>
               </div>
             </div>
           </Col>
         </Row>
-        <Button onClick={this.handleSaveNavigation}>Save</Button>
+        <Button onClick={this.handleSaveNavigation}>Lưu</Button>
 
         <Row type="flex" style={{ height: "100%" }}>
           <Col xs={{ span: 24 }} lg={{ span: 8 }} >

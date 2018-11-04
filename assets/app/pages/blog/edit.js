@@ -6,7 +6,7 @@ import SelectPublish from "components/SelectComponent/SelectPublish"
 import SelectImage from "components/SelectComponent/SelectImage"
 import SelectCategory from "components/SelectComponent/SelectCategory"
 import { createBlogPost, changeInputField, getEditBlog, setEditBlog, updateEditBlog } from "pages/blog/_all/actions"
-import {fetchCategoryList} from "actions"
+import { fetchCategoryList } from "actions"
 import { Row, Col, Icon, Divider } from "antd"
 import { history } from "store"
 import { connect } from "react-redux"
@@ -61,11 +61,11 @@ class BlogEdit extends Component {
                   onClick={() => history.push("/admin/blog/list")}
                 >
                   <Icon type="left" theme="outlined" />
-                  <div>Blog posts</div>
+                  <div>Danh sách bài viết</div>
                 </div>
                 <div className="ui-title-bar__main">
                   <div className="ui-title-bar__title">
-                    <h1>Blog post</h1>
+                    <h1>Bài viết</h1>
                   </div>
                 </div>
               </div>
@@ -144,6 +144,7 @@ class BlogEdit extends Component {
                 <div className="ui-card">
                   <div className="ui-card__section">
                     <SelectCategory
+                      categoryId={editPost.category_id}
                       data={{
                         categories: this.props.categories,
                         categorId: editPost.category_id || "",
@@ -179,7 +180,7 @@ class BlogEdit extends Component {
 const mapStateToProps = state => {
   return {
     blogList: state.blog.blogList,
-    editPost: state.blog.editPost, 
+    editPost: state.blog.editPost,
     categories: state.category.categoryList
   }
 }
@@ -190,7 +191,7 @@ const mapDispatchToProps = dispatch => {
     changeInputField: (field, value) => dispatch(changeInputField(field, value)),
     getEditBlog: id => dispatch(getEditBlog(id)),
     setEditBlog: post => dispatch(setEditBlog(post)),
-    updateEditBlog: params => dispatch(updateEditBlog(params)), 
+    updateEditBlog: params => dispatch(updateEditBlog(params)),
     fetchCategoryList: (page, entries) => dispatch(fetchCategoryList(page, entries))
   }
 }

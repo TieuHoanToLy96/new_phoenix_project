@@ -51,11 +51,11 @@ class CategoryList extends Component {
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
                     <div className="ui-title-bar__navigation" >
-                      <div>Categories</div>
+                      <div>Danh mục</div>
                     </div>
                     <div className="ui-title-bar__main">
                       <div className="ui-title-bar__title no-margin">
-                        <h1>Categories</h1>
+                        <h1>Danh mục</h1>
                       </div>
                     </div>
                   </div>
@@ -65,9 +65,9 @@ class CategoryList extends Component {
             <div className="ui-page--actions is-full-width">
               <div className="ui-page--action__wrapper ">
                 <div className="is-flex is-row is-full-width is-full-height is-flex-end">
-                  <Input placeholder="Search category" style={{ height: 40 }} />
-                  <div onClick={this.handleAddCategory} className="default-button default-button--save">
-                    Add category
+                  <Input placeholder="Tìm danh mục" style={{ height: 40 }} />
+                  <div style={{width: 150}} onClick={this.handleAddCategory} className="default-button default-button--save">
+                  Thêm danh mục
                 </div>
 
                 </div>
@@ -86,21 +86,21 @@ class CategoryList extends Component {
                   }}
                 >
                   <Table.Column
-                    title="Name"
+                    title="Tên danh mục"
                     dataIndex="name"
                     key="name"
                   />
                   <Table.Column
-                    title="Status"
+                    title="Hiển thị"
                     key="status"
                     render={(text, record) => (
                       <div>
-                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Hiện</Tag> : <Tag color="red">Ẩn</Tag>}
                       </div>
                     )}
                   />
                   <Table.Column
-                    title="Inserted at"
+                    title="Ngày thêm vào"
                     dataIndex="inserted_at"
                     key="inserted_at"
                   />

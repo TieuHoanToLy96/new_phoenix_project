@@ -18,10 +18,10 @@ class SelectPublish extends React.Component {
   render() {
     return (
           <div className="form-section">
-          <h1>Visibility</h1>
+          <h1>Hiển thị</h1>
             <Radio.Group onChange={this.onChange} value={this.state.value || this.props.data}>
-              <Radio value={true}>Visible</Radio>
-              <Radio value={false}>Hidden</Radio>
+              <Radio value={true}>Hiện</Radio>
+              <Radio value={false}>Ẩn</Radio>
             </Radio.Group>
           </div>
 
