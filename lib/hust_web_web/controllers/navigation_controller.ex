@@ -17,7 +17,6 @@ defmodule HustWebWeb.NavigationController do
 
   def get_all(conn, _) do
     with {:ok, navigations} <- Navigations.get_navigations() do
-      IO.inspect(navigations, label: "get navigations")
       json(conn, %{
         success: true,
         navigations: navigations |> Enum.map( fn el -> NavigationView.render("navigation_just_loaded.json", el) end)

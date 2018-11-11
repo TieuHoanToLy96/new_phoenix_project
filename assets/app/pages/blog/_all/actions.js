@@ -1,5 +1,6 @@
 import { sendGet, sendPost } from "utils/request.js"
 import Notification from "components/Notification"
+import ActionButton from "antd/lib/modal/ActionButton";
 
 export const updateEditBlog = data => {
   return dispatch => {
@@ -22,13 +23,13 @@ export const updateEditBlog = data => {
       }
       )
       .catch(error => {
-        Notification.errorStrict(error, "Update fail" ," by beotron")
+        Notification.errorStrict(error, "Update fail", " by beotron")
       })
   }
 }
 
 export const setEditBlog = (blog) => {
-  return{
+  return {
     type: "BLOG::SET_EDIT_BLOG",
     payload: blog
   }
@@ -37,47 +38,65 @@ export const setEditBlog = (blog) => {
 export const getEditBlog = id => {
   return dispatch => {
     const url = `/api/admin/blogs/get_blog?id=${id}`
-    return sendPost(url, null).then(res =>{
-      if(res.status == 200 & res.data.success == true){
+    return sendPost(url, null).then(res => {
+      if (res.status == 200 & res.data.success == true) {
         dispatch({
           type: "BLOG::GET_EDIT_BLOG_SUCCESS",
           payload: res.data.edit_blog
         })
-      }else{
+      } else {
         dispatch({
           type: "BLOG::GET_EDIT_BLOG_FAIL",
         })
       }
     })
-    .catch(error => {
-      Notification.errorStrict(error, "Get fail" ," by beotron")
-    })
+      .catch(error => {
+        Notification.errorStrict(error, "Get fail", " by beotron")
+      })
   }
 }
+
+export const getBlogBySlug = slug => {
+  return dispatch => {
+    const url = `/api/admin/blogs/${slug}`
+    return sendPost(url, null).then(res => {
+      if (res.status == 200 && res.data.success == true) {
+        dispatch({
+          type: "BLOG::SET_EDIT_BLOG",
+          payload: res.data.blog
+        })
+      }
+    })
+      .catch(error => {
+        Notification.errorStrict(error, "Get fail", " by beotron")
+      })
+  }
+}
+
 export const fetchBlogList = (entries, page) => {
   return dispatch => {
     const url = `/api/admin/blogs/get_all?entries=${entries}&page=${page}`
     dispatch({
-      type:  "BLOG::FETCH_BLOG_LIST"
+      type: "BLOG::FETCH_BLOG_LIST"
     })
     return sendPost(url, null)
-    .then(res => {
-      if(res.status == 200 && res.data.success == true){
-        console.log(res.data)
-        dispatch({
-          type: "BLOG::FETCH_BLOG_LIST_SUCCESS",
-          payload: res.data
-        })
-      }else {
-        dispatch({
-          type: "BLOG::FETCH_BLOG_LIST_FAIL"
-        })
-        Notification.error(res.data.message || "Get blog list fail")
-      }
-    })
-    .catch(error => {
-      Notification.errorStrict(error, "Get fail" ," by beotron")
-    })
+      .then(res => {
+        if (res.status == 200 && res.data.success == true) {
+          console.log(res.data)
+          dispatch({
+            type: "BLOG::FETCH_BLOG_LIST_SUCCESS",
+            payload: res.data
+          })
+        } else {
+          dispatch({
+            type: "BLOG::FETCH_BLOG_LIST_FAIL"
+          })
+          Notification.error(res.data.message || "Get blog list fail")
+        }
+      })
+      .catch(error => {
+        Notification.errorStrict(error, "Get fail", " by beotron")
+      })
   }
 }
 
@@ -102,14 +121,47 @@ export const createBlogPost = (data) => {
       }
       )
       .catch(error => {
-        Notification.errorStrict(error, "create fail" ," by beotron")
+        Notification.errorStrict(error, "create fail", " by beotron")
       })
   }
 }
 
 export const changeInputField = (field, value) => {
-  return{
-    type: "BLOG::CHANGE_INPUT_FIELD", 
-    payload: {field: field, value: value}
+  return {
+    type: "BLOG::CHANGE_INPUT_FIELD",
+    payload: { field: field, value: value }
+  }
+}
+
+export const getRecentBlogs = () => {
+  return dispatch => {
+    const url = `/api/admin/blogs/get_recent_blogs`
+    return sendPost(url, null).then(res => {
+      if (res.status == 200 && res.data.success == true) {
+        dispatch({
+          type: "BLOG::GET_RECENT_BLOGS_SUCCESS",
+          payload: res.data.recent_blogs
+        })
+      }
+    })
+      .catch(error => {
+        Notification.errorStrict(error, "create fail", " by beotron")
+      })
+  }
+}
+export const getPinnedBlogs = () => {
+  return dispatch => {
+    const url = `/api/admin/blogs/get_pinned_blogs`
+    return sendPost(url, null).then(res => {
+      if (res.status == 200 && res.data.success == true) {
+        dispatch({
+          type: "BLOG::GET_PINNED_BLOGS_SUCCESS",
+          payload: res.data.pinned_blogs
+        })
+      }
+    })
+      .catch(error => {
+        Notification.errorStrict(error, "create fail", " by beotron")
+      })
   }
 }

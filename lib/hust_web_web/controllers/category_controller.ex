@@ -62,4 +62,14 @@ defmodule HustWebWeb.CategoryController do
       end
   end
 
+  def get_category_by_slug(conn, %{"slug" => slug}) do
+    with  {:ok, category} <- Categories.get_category_by_slug(slug) do
+      IO.inspect(category, label: "fuckkkkk")
+      json(conn, %{
+        success: true,
+        category: CategoryView.render("category_just_loaded.json", category)
+      })
+    end
+  end
+
 end

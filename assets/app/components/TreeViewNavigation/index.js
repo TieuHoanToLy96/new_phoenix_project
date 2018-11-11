@@ -32,8 +32,8 @@ class TreeViewNavigation extends React.Component {
 
   renderType = type => {
     switch (type) {
-      case field.POSTS: return "Blog"
-      case field.CATEGORY: return "Category"
+      case field.POSTS: return "Bài viết"
+      case field.CATEGORY: return "Danh mục"
       default: return ""
     }
   }

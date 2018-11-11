@@ -70,16 +70,11 @@ class MainLayout extends React.Component {
                 inlineCollapsed={this.state.collapsed}
                 onClick={this.handleClickMenu}
               >
-                <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Dashboard</span></span>}>
-                  <Menu.Item key="5">Statistic</Menu.Item>
-                  <Menu.Item key="6">Option 6</Menu.Item>
-                  <Menu.Item key="7">Option 7</Menu.Item>
-                  <Menu.Item key="8">Option 8</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Blog</span></span>}>
-                  <Menu.Item key="/admin/blog/list">Blog List</Menu.Item>
-                  <Menu.Item key="/admin/category/list">Blog Categories</Menu.Item>
-                  <Menu.Item key="/admin/navigation/list">Navigation</Menu.Item>
+               
+                <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Quản lý</span></span>}>
+                  <Menu.Item key="/admin/blog/list">Danh sách bài viết</Menu.Item>
+                  <Menu.Item key="/admin/category/list">Danh mục</Menu.Item>
+                  <Menu.Item key="/admin/navigation/list">Thanh điều hướng</Menu.Item>
                   {/* <SubMenu key="sub3" title="Submenu">
                     <Menu.Item key="11">Option 11</Menu.Item>
                     <Menu.Item key="12">Option 12</Menu.Item>

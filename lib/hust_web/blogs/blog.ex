@@ -7,7 +7,8 @@ defmodule HustWeb.Blogs.Blog do
     field(:name, :string)
     field(:slug, :string)
     field(:content, :string)
-    field(:images, {:array, :string})
+    field(:images, {:array, :binary})
+    field(:image_binary, :binary)
     field(:author, :string)
     field(:is_published, :boolean, default: false)
     field(:is_deleted, :boolean, default: false)
@@ -15,7 +16,7 @@ defmodule HustWeb.Blogs.Blog do
 
     field(:excerpt, :string)
     field(:page_title, :string)
-    field(:meta_description, :string)
+    field(:meta_description, :binary)
 
     belongs_to(:category, Categories, foreign_key: :category_id)
 
@@ -35,7 +36,8 @@ defmodule HustWeb.Blogs.Blog do
         :excerpt,
         :page_title,
         :meta_description,
-        :category_id
+        :category_id,
+        :image_binary
       ])
       |> validate_required([:slug])
   end

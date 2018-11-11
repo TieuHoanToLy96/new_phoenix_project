@@ -3,6 +3,7 @@ defmodule HustWeb.Categories do
   import Ecto.Query, only: [from: 2]
   alias HustWeb.Repo
   alias HustWeb.Categories.Category
+  alias HustWeb.Blogs.Blog
 
   def get_category_by_entries(page, entries) do
     IO.inspect(page, label: "pageeeee")
@@ -54,4 +55,24 @@ defmodule HustWeb.Categories do
    {:ok, Repo.one(query)}
   end
 
+  def get_category_by_slug(slug) do
+    preload_blog =
+      from(
+        b in Blog,
+        where: b.is_published == true and b.is_deleted == false,
+        order_by: [desc: :inserted_at]
+      )
+    query =
+      from(
+        c in Category,
+        where: c.slug == ^slug,
+        preload: [blogs: ^preload_blog]
+      )
+   case Repo.one(query) do
+    nil -> {:error, "Not exist category"}
+    category -> {:ok,category}
+   end
+
+
+  end
 end

@@ -46,6 +46,40 @@ defmodule HustWeb.Blogs do
     {:ok, data, total_entries}
   end
 
+  def get_recent_blogs() do
+    query =
+      from(
+        b in Blog,
+        limit: 10,
+        order_by: [desc: :inserted_at]
+      )
+    {:ok, Repo.all(query)}
+  end
+
+  def get_pinned_blogs() do
+    query =
+      from(
+        b in Blog,
+        limit: 10,
+        where: b.is_pinned == true and b.is_deleted == false and b.is_published == true
+      )
+
+    {:ok, Repo.all(query)}
+  end
+
+  def get_blog_by_slug(slug) do
+    query =
+      from(
+        b in Blog,
+        where: b.slug == ^slug and b.is_published == true and b.is_deleted == false
+      )
+
+    case Repo.one(query) do
+      nil -> {:error, nil}
+      blog -> {:ok, blog}
+    end
+  end
+
   def update_blog(blog_params) do
     update_blog =
       blog_params

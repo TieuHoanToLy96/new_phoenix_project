@@ -3,7 +3,6 @@ import 'froala-editor/css/froala_style.min.css';
 import "froala-editor/css/froala_editor.pkgd.min.css"
 import FroalaEditor from "react-froala-wysiwyg"
 import 'font-awesome/css/font-awesome.css'
-import FontPicker from 'font-picker-react';
 import { Input } from "antd"
 
 class TitleAndContent extends React.Component {
@@ -24,13 +23,13 @@ class TitleAndContent extends React.Component {
     return (
       <div>
         <div className="form-section">
-          <label> Title</label>
+          <label> Tiêu đề</label>
           <Input 
           value={name}
           onChange={this.handleChangeInputField("name")}/>
         </div>
         <div className="form-section no-margin">
-          <label>Content</label>
+          <label>Nội dung</label>
           <FroalaEditor
             config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
             tag="textarea"

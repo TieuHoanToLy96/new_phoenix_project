@@ -76,13 +76,13 @@ class NavigationList extends React.Component {
           showModal &&
           <Modal
             visible={true}
-            title="Add new navigation"
+            title="Thêm điều hướng mới"
             onOk={this.handleCreateNavigation}
-            okText="Create navigation"
+            okText="Thêm"
             onCancel={this.closeModal}
           >
             <div className="is-flex is-padding-15" style={{ alignItems: "center" }}>
-              <span className="is-margin-5" style={{ minWidth: 100 }}>Navigation name:</span>
+              <span className="is-margin-5" style={{ minWidth: 100 }}>Tên điều hướng:</span>
               <Input
                 onPressEnter={this.handleCreateNavigation}
                 onChange={this.handleChangeInputField("name")}
@@ -102,11 +102,11 @@ class NavigationList extends React.Component {
                   <div className="ui-title-bar--wrapper">
                     <div className="ui-title-bar__navigation">
                       {/* <Icon type="left" theme="outlined" /> */}
-                      <div>Navigation</div>
+                      <div>Điều hướng</div>
                     </div>
                     <div className="ui-title-bar__main">
                       <div className="ui-title-bar__title no-margin">
-                        <h1>Navigation list</h1>
+                        <h1>Danh sách thanh điều hướng</h1>
                       </div>
                     </div>
                   </div>
@@ -116,8 +116,8 @@ class NavigationList extends React.Component {
             <div className="ui-page--actions is-full-width">
               <div className="ui-page--action__wrapper ">
                 <div className="is-flex is-row is-full-width is-full-height is-flex-end">
-                  <div onClick={this.handleAddNavigation} className="default-button default-button--save">
-                    Add navigation
+                  <div style={{width: 150}} onClick={this.handleAddNavigation} className="default-button default-button--save">
+                  Thêm điều hướng
                 </div>
 
                 </div>
@@ -136,26 +136,26 @@ class NavigationList extends React.Component {
                   }}
                 >
                   <Table.Column
-                    title="Name"
+                    title="Tên"
                     dataIndex="name"
                     key="name"
                   />
                   <Table.Column
-                    title="Change"
+                    title="Trạng thái"
                     key="status"
                     render={(record) => (
                       <div>
-                        {record.is_published ? <Tag color="green">Published</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Hiện</Tag> : <Tag color="red">Ẩn</Tag>}
                       </div>
                     )}
                   />
                   <Table.Column
-                    title="Action"
+                    title="Thay đổi"
                     key="action"
                     render={(record) => (
                       <div className="button-tree is-flex">
                         <button style={{ verticalAlign: 'middle' }} onClick={this.handleChangeCurrent(record)}>
-                          Change
+                        Đổi
                         </button>
                         <div className="button-tree--delete is-flex" onClick={this.handleRemoveNavigation(record.id)}>
                           <Icon type="delete" theme="outlined" />

@@ -20,16 +20,16 @@ class SelectCategory extends React.Component {
 
   render() {
     const { categoryId, author } = this.state
-    console.log(categoryId, this.props.data.categoryId)
+    console.log("category idddd", categoryId, this.props.categoryId)
     return (
       <div className="form-section">
-        <h1>Category</h1>
+        <h1>Danh mục</h1>
         <Select
           showSearch
-          placeholder="Select a category"
+          placeholder="Chọn một danh mục"
           optionFilterProp="children"
           onChange={this.handleChange("category_id")}
-          value={categoryId || this.props.data.categoryId}
+          value={categoryId || this.props.categoryId}
           // value={1}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
@@ -38,15 +38,16 @@ class SelectCategory extends React.Component {
           {/* <Select.Option value="Mon 2">Mon 2</Select.Option> */}
           
         </Select>
-        <h1>Author</h1>
+        <h1>Tác giả</h1>
          <Select
           showSearch
-          placeholder="Select a author"
+          placeholder="Chọn một Tác giả"
           optionFilterProp="children"
           onChange={this.handleChange("author")}
           value={author || this.props.data.author}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
+        <Select.Option value="ThuanPV">ThuanPV</Select.Option>
        
           <Select.Option value="TieuHoan">TieuHoan</Select.Option>
           <Select.Option value="ToLy">ToLy</Select.Option>

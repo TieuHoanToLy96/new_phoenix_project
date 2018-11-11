@@ -43,11 +43,11 @@ class BlogList extends Component {
                 <div className="ui-title-bar">
                   <div className="ui-title-bar--wrapper">
                     <div className="ui-title-bar__navigation"  >
-                      <div>Blog posts</div>
+                      <div>Bài viết</div>
                     </div>
                     <div className="ui-title-bar__main">
                       <div className="ui-title-bar__title no-margin">
-                        <h1>Blog post</h1>
+                        <h1>Bài viết</h1>
                       </div>
                     </div>
                   </div>
@@ -63,9 +63,9 @@ class BlogList extends Component {
                   onSearch={value => console.log(value)}
                 /> */}
                 <div className="is-flex is-row is-full-width is-full-height is-flex-end">
-                  <Input placeholder="Search blog" style={{ height: 40 }} />
-                  <div onClick={this.handleAddBlog} className="default-button default-button--save">
-                    Add blog
+                  <Input placeholder="Tìm kiếm bài viết" style={{ height: 40 }} />
+                  <div style={{width: 150}} onClick={this.handleAddBlog} className="default-button default-button--save">
+                  Thêm bài viết
                 </div>
 
                 </div>
@@ -84,12 +84,12 @@ class BlogList extends Component {
                   }}
                 >
                   <Table.Column
-                    title="Name"
+                    title="Tên"
                     dataIndex="name"
                     key="name"
                   />
                   <Table.Column
-                    title="Category"
+                    title="Danh mục"
                     dataIndex="category"
                     key="category"
                     render={(text, record) => (
@@ -99,21 +99,21 @@ class BlogList extends Component {
                     )}
                   />
                   <Table.Column
-                    title="Author"
+                    title="Tác giả"
                     dataIndex="author"
                     key="author"
                   />
                   <Table.Column
-                    title="Status"
+                    title="Trạng thái"
                     key="status"
                     render={(text, record) => (
                       <div>
-                        {record.is_published ? <Tag color="green">Visible</Tag> : <Tag color="red">Hidden</Tag>}
+                        {record.is_published ? <Tag color="green">Hiện</Tag> : <Tag color="red">Ẩn</Tag>}
                       </div>
                     )}
                   />
                   <Table.Column
-                    title="Inserted at"
+                    title="Ngày thêm vào"
                     dataIndex="inserted_at"
                     key="inserted_at"
                   />

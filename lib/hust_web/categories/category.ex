@@ -2,7 +2,7 @@ defmodule HustWeb.Categories.Category do
   use Ecto.Schema
   import Ecto.Changeset
   alias HustWeb.Categories.Category
-
+  alias HustWeb.Blogs.Blog
   schema "categories" do
     field(:name, :string)
     field(:slug, :string)
@@ -14,7 +14,7 @@ defmodule HustWeb.Categories.Category do
     field(:excerpt, :string)
     field(:page_title, :string)
     field(:meta_description, :string)
-
+    has_many :blogs, Blog
     timestamps()
   end
   def changeset(%Category{} = category, attrs) do

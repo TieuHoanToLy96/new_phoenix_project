@@ -11,6 +11,20 @@ class SelectImage extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.image != this.props.image){
+      let image = nextProps.image ? [{
+        uid: '-1',
+        status: 'done',
+        url: nextProps.image,
+     
+      }] : []
+      this.setState({
+        fileList: image
+      })
+    }
+  }
+
   handlePreview = (file) => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
@@ -18,7 +32,12 @@ class SelectImage extends React.Component {
     });
   }
 
-  handleChange = ({ fileList }) => { this.setState({ fileList }) }
+  handleChange = ({ file, fileList }) => {
+    if (file.percent == 100 || file.status == "done") {
+      this.props.handleChangeInputField("image_binary", file.thumbUrl)
+    }
+    this.setState({ fileList })
+  }
   handleCancel = () => { this.setState({ previewVisible: false }) }
 
   render() {
@@ -31,7 +50,7 @@ class SelectImage extends React.Component {
     );
     return (
       <div className="form-section">
-        <h1>Featured image</h1>
+        <h1>Ảnh nổi bật</h1>
         <div className="clearfix is-flex is-row is-relative" >
           <Upload
             action="//jsonplaceholder.typicode.com/posts/"
@@ -44,7 +63,7 @@ class SelectImage extends React.Component {
           </Upload>
           <div className="is-flex is-center is-absolute is-right is-full-height ">
             <div className="default-button default-button--save">
-              Select
+              Chọn
             </div>
           </div>
           <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
