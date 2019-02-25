@@ -1,6 +1,9 @@
 import { Row, Col, Input, Tabs } from "antd"
 import { connect } from "react-redux"
+import moment from "moment"
+
 import { getCategoryBySlug, getRecentBlogs, getPinnedBlogs } from "actions"
+
 class CategoryGuest extends React.Component {
   constructor(props) {
     super(props)
@@ -40,21 +43,19 @@ class CategoryGuest extends React.Component {
             </div>
             <div className="g-article--item__content is-flex is-column">
               <div className="article-info">
-                <span className="article-date"><span>{blog.inserted_at}</span></span>
+                <span className="article-date"><span>{moment(blog.inserted_at).format("HH:mm DD-MM-YYYY")}</span></span>
                 <span className="article-author"><i className="fa fa-user"></i> <span ><a >{blog.author}</a></span></span>
-                <span className="article-categories">Categories:
-                  <a>{categoryBySlug.name}</a>
+                <span className="article-categories">Danh mục:
+                  <a href={`/categories/${categoryBySlug.slug}`} >{categoryBySlug.name}</a>
                 </span>
               </div>
 
-              <h2 className="article-title" ><a>{blog.name}</a></h2>
-              {/* <p className="article-description"> */}
-              <p> {blog.excerpt}</p>
-              {/* </p> */}
-
+              <h2 className="article-title" ><a href={`/blog/${blog.slug}`} >{blog.name}</a></h2>
+              <div dangerouslySetInnerHTML={{__html: blog.excerpt}}>
+              </div>
               <div className="article-readmore">
-                <a href={`/blogs/${blog.slug}`}>
-                  Read More
+                <a href={`/blog/${blog.slug}`}>
+                  Xem thêm
               </a>
               </div>
 
@@ -75,11 +76,13 @@ class CategoryGuest extends React.Component {
             <img src={blog.image_binary || "https://demo.mythemeshop.com/school/files/2014/03/pexels-photo-51415-74x74.jpeg"} />
           </div>
           <div className="article-pin__title is-flex-1 ml-15">
-            {blog.name}
+            <a href={`/blog/${blog.slug}`}>
+              {blog.name}
+            </a>
           </div>
         </div>
         <div className="article-pin__date">
-          {blog.inserted_at}
+          {moment(blog.inserted_at).format("HH:mm DD-MM-YYYY")}
         </div>
       </div>
     )
@@ -91,24 +94,22 @@ class CategoryGuest extends React.Component {
     return (
       <div className="mb-50 mt-30">
         <Row>
-          <Col lg={14} md={24}>
+          <Col lg={15} md={24}>
             <div className="g-article--list">
               {this.renderBlogs()}
-              p
-
             </div>
           </Col>
-          <Col lg={{ span: 8, offset: 1 }} md={{ span: 24 }}>
+          <Col lg={{ span: 7, offset: 1 }} md={{ span: 24 }}>
             <div className="search mb-30">
               <Input.Search className="mb-30" />
               <div className="g-side-article">
                 <div className="g-article--wrapper">
                   <div className="tab-name is-flex is-row">
                     <div className="tab-title is-select" onClick={this.handleChangeTab("tab-title", "tab-title is-select")}>
-                      <a>Pin post</a>
+                      <a>Bài ghim</a>
                     </div>
                     <div className="tab-title" onClick={this.handleChangeTab("tab-title", "tab-title is-select")}>
-                      <a> Recent post</a>
+                      <a> Bài gần đây</a>
                     </div>
                   </div>
                   {

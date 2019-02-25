@@ -19,6 +19,7 @@ import NavigationList from "pages/navigation/list"
 import BlogPost from "./guest/blog/blog_post"
 import HomeGuest from "./guest/home";
 import CategoryGuest from "./guest/category/index"
+import Video from "./guest/video/index"
 const routes = [
   {
     path: "/admin",
@@ -96,6 +97,10 @@ const routes = [
       {
         path: "/blog/:slug",
         component: BlogPost
+      }, 
+      {
+        path: "/video", 
+        component: Video
       }
     ]
   }

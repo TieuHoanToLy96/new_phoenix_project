@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
-import { getNavigation, getNavigations } from "../pages/navigation/_all/actions";
+import { getNavigations } from "../pages/navigation/_all/actions";
 
 class MainLayoutGuest extends React.Component {
   componentDidMount() {
+    if(this.props.isLoadedNav) return;
     this.props.dispatch(getNavigations())
   }
   openMobileMenu = () => {
@@ -22,6 +23,7 @@ class MainLayoutGuest extends React.Component {
     mobileMenu.style.width = "0"
     mobileMenuContent.style.display = "none"
   }
+
   render() {
     const { navigations } = this.props
     return (
@@ -53,18 +55,18 @@ class MainLayoutGuest extends React.Component {
                   <a href="https://demo.mythemeshop.com/school">Hust</a>
                 </h2>
                 <div className="g-header--logo__des">
-                  <div>LEARN ARM THEME</div>
+                  <div>HỌC ARM</div>
                 </div>
 
               </div>
-              <div className="g-primary-navigation is-flex-1 ml-100 mb-30">
+              <div className="g-primary-navigation is-flex-1 ml-100 mb-300">
                 <nav>
                   <a className="toggle-mobile-menu" onClick={this.openMobileMenu}>
                     <span>Menu</span>
                   </a>
 
                   <ul>
-                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a>Home</a></li>
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a href="/home">Trang chủ</a></li>
                     {navigations.length && navigations.filter(el => el.name == "header").map(el => el.settings)[0].map((el, index) => {
                       return (
                         <li key={index} className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home ">
@@ -72,9 +74,9 @@ class MainLayoutGuest extends React.Component {
                           {el.children && el.children.length > 0 &&
                             <ul className='sub-menu'>
                               {
-                                el.children.map(elem => {
+                                el.children.map((elem, idx) => {
                                   return (
-                                    <li className="menu-item menu-item-type-post_type menu-item-object-page">
+                                    <li key={idx} className="menu-item menu-item-type-post_type menu-item-object-page">
                                     <a href={elem.url}>{elem.title}</a></li>
                                   )
                                 })
@@ -84,7 +86,6 @@ class MainLayoutGuest extends React.Component {
                         </li>
                       )
                     })}
-
                   </ul>
                 </nav>
               </div>
@@ -214,7 +215,8 @@ class MainLayoutGuest extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    navigations: state.navigation.navigations
+    navigations: state.navigation.navigations, 
+    isLoadedNav: state.navigation.isLoadedNav
   }
 }
 

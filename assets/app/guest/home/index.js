@@ -8,7 +8,7 @@ class HomeGuest extends React.Component {
     return (
       <div>
          <div className="g-intro-container">
-          <div className="g-container is-padding-container">
+          <div className="">
             <div className="g-highlight">
               <div className="g-highlight-item">
                 <div className="g-top-line">

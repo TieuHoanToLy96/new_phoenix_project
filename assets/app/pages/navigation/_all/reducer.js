@@ -4,10 +4,13 @@ import { findIndex } from "lodash"
 
 const initState = {
   navigations: [],
+  isLoadedNav: false, 
   editNavigation: {
     name: "",
     treeData: []
-  }
+  }, 
+  fieldEdit: field.NULL,
+  nodeInfo: {}
 }
 
 export default (state = initState, action) => {
@@ -43,6 +46,7 @@ export default (state = initState, action) => {
 
     case "NAVIGATION::GET_NAVIGATIONS_SUCCESS":
       return update(state, {
+        isLoadedNav: {$set: true},
         navigations: { $set: action.payload }
       })
 
@@ -71,6 +75,12 @@ export default (state = initState, action) => {
           navigations: { $splice: [[index, 1]] }
         })
       return state
+
+    case "NAVIGATION::SET_FIELD_EDIT": return update(state, { fieldEdit: { $set: action.payload } })
+    case "NAVIGATION::SET_NODE_INFO": return update(state, { nodeInfo: { $set: action.payload } })
+
+    case "NAVIGATION::SET_INPUT_FIELD": return update(state, { nodeInfo: { node: { [action.payload.field]: { $set: action.payload.data } } } })
+    
 
     default:
       return state
