@@ -1,6 +1,6 @@
 import Collapse, { Panel } from "rc-collapse"
 import('rc-collapse/assets/index.css')
-import { Table, Button } from "antd"
+import { Table, Button, Row, Col, Input } from "antd"
 import connect from "react-redux/lib/connect/connect";
 import { fetchBlogList } from "pages/blog/_all/actions";
 import { addNodeToTreeData } from "pages/navigation/_all/actions";
@@ -20,6 +20,9 @@ class CollapseView extends React.Component {
       selectedBlog: [],
       selectedRowKeysBlog: [],
       selectedRowsBlog: [],
+
+      linkText: "", 
+      url: ""
     }
   }
 
@@ -93,10 +96,37 @@ class CollapseView extends React.Component {
     }
   }
 
+  handleAddCustomLinks = () => {
+      let data = [
+        {
+          title: this.state.linkText,
+          expanded: true,
+          url: this.state.url,
+          description: "",
+          titleAttribute: "",
+          css: "",
+          linkRelationship: "",
+          type: field.CUSTOM_LINKS
+        }
+      ]
+      this.props.dispatch(addNodeToTreeData(data))
+      this.setState({
+        url: "/",
+        linkText: ""
+      })
+  }
+
+  handleChangeInput = field => e => {
+    let value = e.target ? e.target.value || "" : e
+    this.setState({
+      [field]: value
+    })
+  }
+
   render() {
     const {categoryList} = this.props.category
     const { blogList } = this.props
-    const { selectedRowKeysBlog, selectedRowKeysCate, selectedRowsBlog, selectedRowsCate } = this.state
+    const { selectedRowKeysBlog, selectedRowKeysCate, selectedRowsBlog, selectedRowsCate, linkText, url } = this.state
     const rowSelectionBlog = {
       selectedRowKeys: selectedRowKeysBlog,
       selectedRows: selectedRowsBlog,
@@ -148,6 +178,19 @@ class CollapseView extends React.Component {
             </Table>
 
             <Button onClick={this.handleAddCategories} style={{ marginTop: 20 }}> Thêm</Button>
+          </Panel>
+          <Panel header="Tuỳ chỉnh link">
+            <Row align="middle" type="flex" justify="center">
+              <Col span={6} ><b>URL</b></Col>
+              <Col span={16} offset={1}><Input value={url} onChange={this.handleChangeInput("url")} /></Col>
+            </Row>
+            <Row align="middle" type="flex" justify="center" style={{ marginTop: 5 }}>
+              <Col span={6}><b>Link text</b></Col>
+              <Col span={16} offset={1}> <Input value={linkText} onChange={this.handleChangeInput("linkText")} /></Col>
+            </Row>
+            <Row type="flex" justify="start" style={{ marginTop: 20 }}>
+              <Col push={5} ><Button onClick={this.handleAddCustomLinks}> Thêm</Button></Col>
+            </Row>
           </Panel>
 
         </Collapse>

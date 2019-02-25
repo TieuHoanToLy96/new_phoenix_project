@@ -2,7 +2,7 @@ import SortableTree, {removeNodeAtPath} from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-minimal';
 import { Icon } from "antd"
 import { connect } from 'react-redux';
-import { setTreeData } from '../../pages/navigation/_all/actions';
+import { setTreeData, setObjectEdit, setFieldEdit } from '../../pages/navigation/_all/actions';
 import { field } from '../../pages/navigation/_all/reducer';
 class TreeViewNavigation extends React.Component {
 
@@ -18,6 +18,8 @@ class TreeViewNavigation extends React.Component {
 
   handleClickEditNode = (nodeInfo) => {
     console.log(nodeInfo, "nodeInfo")
+    this.props.dispatch(setObjectEdit(nodeInfo))
+    this.props.dispatch(setFieldEdit(nodeInfo.node.type))
   }
 
   handleRemoveNode = (nodeInfo) => {

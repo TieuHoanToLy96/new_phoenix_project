@@ -45,7 +45,7 @@ class Guest extends React.Component {
                   <a href="https://demo.mythemeshop.com/school">Hust</a>
                 </h2>
                 <div className="g-header--logo__des">
-                  <div>LEARN ARM THEME</div>
+                  <div>HỌC ARM</div>
                 </div>
 
               </div>
@@ -57,7 +57,7 @@ class Guest extends React.Component {
 
                   <ul>
 
-                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a>Home</a></li>
+                    <li id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item"><a>Trang chủ</a></li>
                     {navigations.filter(el => el.name == "header").map((el, index) => {
                       return (
                         <li key={index} id="menu-item-161" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home ">
@@ -92,7 +92,7 @@ class Guest extends React.Component {
           </div>
           <div className="g-page-header">
             <div className="g-container is-padding-container is-column" >
-              <h1 className="g-entry-title">Home</h1>
+              <h1 className="g-entry-title">Trang chủ</h1>
               <div className="g-breadcrumb mb-100">
                 <span className="first" >
                   <a>Home&nbsp;/&nbsp;</a></span><span className="last">

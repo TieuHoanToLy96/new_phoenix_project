@@ -128,3 +128,24 @@ export const getNavigation = id => {
       })
   }
 }
+
+export const setObjectEdit = (nodeInfo) => {
+  return {
+    type: "NAVIGATION::SET_NODE_INFO",
+    payload: nodeInfo
+  }
+}
+
+export const setFieldEdit = field => {
+  return {
+    type: "NAVIGATION::SET_FIELD_EDIT",
+    payload: field
+  }
+}
+
+export const setInputField = (field, data) => {
+  return {
+    type: "NAVIGATION::SET_INPUT_FIELD",
+    payload: { field, data }
+  }
+}

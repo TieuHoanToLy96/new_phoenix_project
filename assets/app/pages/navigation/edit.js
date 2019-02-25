@@ -1,8 +1,13 @@
 import { connect } from "react-redux";
 import { Col, Row, Button, Icon, Input } from "antd"
+
 import CollapseView from "components/CollapseView/index"
 import TreeViewNavigation from "components/TreeViewNavigation/index"
+import EditCustomLinks from "components/EditCustomLinks/index"
+
+
 import { saveNavigation, changeNameNavigation, getNavigation, updateNavigation } from "./_all/actions"
+import { field } from '../../pages/navigation/_all/reducer';
 import { history } from "store"
 
 class NavigationEdit extends React.Component {
@@ -36,8 +41,20 @@ class NavigationEdit extends React.Component {
     }
   }
 
+  renderEdit = fieldEdit => {
+    switch (fieldEdit) {
+      case field.CUSTOM_LINKS: return <EditCustomLinks />
+      case field.POSTS: return <EditCustomLinks />
+      case field.CATEGORIES: return <EditCustomLinks />
+      case field.PAGES: return <EditCustomLinks />
+      default: return <div> </div>
+    }
+  }
+
+
   render() {
     const { name } = this.props.editNavigation
+    const { fieldEdit } = this.props
     return (
       <div className="wrapper-content mb-30">
         <Row>
@@ -82,7 +99,7 @@ class NavigationEdit extends React.Component {
             </div>
           </Col>
           <Col lg={{ span: 8 }} >
-            {/* {this.renderEdit(fieldEdit)} */}
+            {this.renderEdit(fieldEdit)}
           </Col>
         </Row>
 
@@ -93,7 +110,8 @@ class NavigationEdit extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    editNavigation: state.navigation.editNavigation
+    editNavigation: state.navigation.editNavigation, 
+    fieldEdit: state.navigation.fieldEdit,
   }
 }
 

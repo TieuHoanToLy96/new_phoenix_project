@@ -12,13 +12,22 @@ class TitleAndContent extends React.Component {
   }
 
   handleChangeInputField = (field) => e => {
+    console.log(e)
     let value = e.target ? e.target.value : e
     this.props.handleChangeInputField(field, value)
   }
 
 
   render() {
+   
     const froalaConfig = ["undo", "redo", "|", "fontSize", "fontFamily", "color", , "bold", "italic", "underline", "strikeThrough", "outdent", "indent", "clearFormatting", "insertLink", "fullscreen"]
+    const config = {
+      toolbarButtons: froalaConfig,
+      htmlSimpleAmpersand: false,
+      heightMax: 200, 
+      quickInsertButtons: [],
+      htmlUntouched: true
+    }
     const {content, name} = this.props.data
     return (
       <div>
@@ -31,7 +40,7 @@ class TitleAndContent extends React.Component {
         <div className="form-section no-margin">
           <label>Nội dung</label>
           <FroalaEditor
-            config={{ toolbarButtons: froalaConfig, heightMax: 200, quickInsertButtons: [] }}
+            config={config}
             tag="textarea"
             model={content}
             onModelChange={this.handleChangeInputField("content")}

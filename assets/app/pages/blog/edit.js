@@ -21,7 +21,6 @@ class BlogEdit extends Component {
   }
   componentDidMount() {
     const postId = this.props.history.location.state ?.id || null
-    console.log(postId, "postID")
     if (postId) {
       this.props.fetchCategoryList(1, 20)
       this.props.getEditBlog(postId).then(() => {
